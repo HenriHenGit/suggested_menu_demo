@@ -48,7 +48,7 @@
 
                         </p>
                     </a>
-                    <a href="{{ route('admin.foods.index') }}" class="nav-link">
+                    <a href="{{ route('admin.ingredients.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý nguyên liệu

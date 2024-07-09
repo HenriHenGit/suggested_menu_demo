@@ -11,20 +11,19 @@ class User_detail extends Model
     use HasFactory;
     // use SoftDeletes;
 
-    protected $table = 'user_details'; // tên bảng trong database
+    protected $table = 'user_details';
 
-    protected $primaryKey = ['user_id', 'nutri_id']; // khóa chính là cặp user_id và nutri_id
-    public $incrementing = false; // không tự động tăng
+    protected $primaryKey = ['user_id', 'nutri_id'];
+    public $incrementing = false;
+    protected $fillable = ['user_id', 'nutri_id', 'amount', 'status'];
 
-    protected $fillable = ['user_id', 'nutri_id', 'amount', 'status']; // các cột có thể được gán
+    public $timestamps = true;
 
-    public $timestamps = true; // nếu bạn sử dụng timestamps
 
-    // nếu sử dụng softDeletes
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    // nếu bạn cần
+
     protected function setKeysForSaveQuery($query)
     {
         $keys = $this->getKeyName();

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminFoodController;
+use App\Http\Controllers\AdminIngredientController;
 use App\Http\Controllers\UserFoodController;
 use App\Http\Controllers\UserMenuController;
 
@@ -26,6 +27,15 @@ Route::middleware('auth_admin')->prefix('admin')->group(function () {
         Route::get('/edit/{id}', [AdminFoodController::class, 'edit'])->name('admin.foods.edit');
         Route::post('/update/{id}', [AdminFoodController::class, 'update'])->name('admin.foods.update');
         Route::get('/delete/{id}', [AdminFoodController::class, 'delete'])->name('admin.foods.delete');
+    });
+    Route::prefix('ingredients')->group(function () {
+        Route::get('/', [AdminIngredientController::class, 'index'])->name('admin.ingredients.index');
+        Route::get('/show/{id}', [AdminIngredientController::class, 'show'])->name('admin.ingredients.show');
+        Route::get('/create', [AdminIngredientController::class, 'create'])->name('admin.ingredients.create');
+        Route::post('/store', [AdminIngredientController::class, 'store'])->name('admin.ingredients.store');
+        Route::get('/edit/{id}', [AdminIngredientController::class, 'edit'])->name('admin.ingredients.edit');
+        Route::post('/update/{id}', [AdminIngredientController::class, 'update'])->name('admin.ingredients.update');
+        Route::get('/delete/{id}', [AdminIngredientController::class, 'delete'])->name('admin.ingredients.delete');
     });
 });
 

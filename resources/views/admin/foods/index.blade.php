@@ -30,7 +30,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 1%">
-                                    ID
+                                    Stt
                                 </th>
                                 <th style="width: 20%">
                                     Hình ành

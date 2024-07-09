@@ -121,6 +121,15 @@ return [
         'phone' => 'số điện thoại',
         'password' => 'mật khẩu',
         'gender' => 'giới tính',
-        'level' => 'thước đo'
+        'level' => 'thước đo',
+        'amount' => 'hàm lượng',
+        'food' => 'món ăn',
+        'ingredient' => 'nguyên liệu',
+        'category_ingre_id' => 'loại nguyên liệu',
+        'category_ingre' => 'loại nguyên liệu',
+        'category_ingredient' => 'loại nguyên liệu',
+        'nutri' => 'dinh dưỡng',
+        'ingredient_detail' => 'chi tiết dinh dưỡng',
+        'unit' => 'đơn vị',
     ],
 ];

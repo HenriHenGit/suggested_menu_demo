@@ -26,6 +26,16 @@ class UsersSeeder extends Seeder
                 'role' => 'admin',
             ],
             [
+                'name' => 'Trần Xuân Hiếu',
+                'email' => '10306211244@caothang.edu.vn',
+                'phone' => '10942632795',
+                'age' => 22,
+                'gender' => 1,
+                'level' => 1,
+                'password' => Hash::make('123456'),
+                'role' => 'user',
+            ],
+            [
                 'name' => 'Võ Thành Trung',
                 'email' => '0306211310@caothang.edu.vn',
                 'phone' => '0372010220',
