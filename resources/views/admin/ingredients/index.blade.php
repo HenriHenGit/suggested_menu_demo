@@ -5,4 +5,5 @@
 @endsection
 
 @section('content')
+    <h1>kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</h1>
 @endsection
