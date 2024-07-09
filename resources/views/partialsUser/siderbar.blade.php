@@ -54,6 +54,13 @@
 
                         </p>
                     </a>
+                    <a href="{{ route('display.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Thực đơn
+
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

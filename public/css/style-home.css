@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.outer-container {
+    margin-top: 20px;
+    border: 2px solid black;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5em;
+    border: 2px solid black;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.circle-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    text-align: center;
+    border: 2px solid black;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.circle-small.current-day {
+    font-weight: bold;
+    background-color: #dcdcdc;
+}
+
+.date-container {
+    display: flex;
+    justify-content: center;
+}
+
+.meals-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.meal {
+    margin-bottom: 20px;
+    border: 2px solid black;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: calc(7 * 60px);
+    /* 7 hình tròn, mỗi hình tròn rộng 50px + margin 5px mỗi bên */
+}
+
+.meal-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.meal-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.meal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.add-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.kcal-info {
+    margin-left: 10px;
+}
+
+/* Panel thông tin chi tiết món ăn */
+.info-panel {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    background-color: #ffffff;
+    width: 300px;
+    max-width: 100%;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 100;
+}
+
+.info-panel.open {
+    display: block;
+}
+
+.info-panel-content {
+    text-align: center;
+}
+
+.info-panel img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-bottom: 10px;
+}
+
+.info-panel table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.info-panel table th,
+.info-panel table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.info-panel table th {
+    background-color: #f2f2f2;
+}
+
+.close-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.close-button:hover {
+    background-color: #c82333;
+}

@@ -6,7 +6,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminFoodController;
 use App\Http\Controllers\UserFoodController;
 use App\Http\Controllers\UserMenuController;
-
+use App\Http\Controllers\UserDisplayController;
+Route::get('/', function () {
+    return view('home');
+});
 // Đăng nhập tài khoản admin
 Route::get('/adminLogin', [AdminController::class, 'login'])->name('adminLogin.login');
 Route::post('/adminLogin', [AdminController::class, 'checkLogin'])->name('adminLogin.checkLogin');
@@ -30,7 +33,7 @@ Route::middleware('auth_admin')->prefix('admin')->group(function () {
 });
 
 // Đăng nhập tài khoản user
-Route::get('/', [UserController::class, 'index'])->name('login.index');
+Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'store'])->name('login.store');
 
 // Đăng kí tài khoản user
@@ -49,7 +52,9 @@ Route::middleware('auth_user')->prefix('user')->group(function () {
     Route::prefix('menus')->group(function () {
         Route::get('/', [UserMenuController::class, 'index'])->name('menus.index');
         Route::post('/update', [UserMenuController::class, 'update'])->name('menus.update');
-        Route::post('/store/{id}', [UserMenuController::class, 'store'])->name('menus.store');
-        // Route::get('/show/{id}', [UserMenuController::class, 'show'])->name('menus.show');
+        Route::post('/store', [UserMenuController::class, 'store'])->name('menus.store');
+    });
+    Route::prefix('display')->group(function () {
+        Route::get('/', [UserDisplayController::class, 'index'])->name('display.index');
     });
 });
