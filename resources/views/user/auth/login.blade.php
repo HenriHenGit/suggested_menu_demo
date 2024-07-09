@@ -60,11 +60,13 @@
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif
                     <div class="row">
-                        <!-- /.col -->
                         <div class="col-12">
                             <button type="submit" class="btn btn-danger btn-block">Đăng nhập</button>
                         </div>
-                        <!-- /.col -->
+                        <div class="col-12 mt-3">
+                            <a href="{{ route('adminLogin.login') }}" class="btn btn-secondary btn-block">Đăng nhập
+                                Admin</a>
+                        </div>
                     </div>
                 </form>
 

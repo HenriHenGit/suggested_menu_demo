@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    </br>
     <div class="content-wrapper">
         <div class="content">
             <div class="container-fluid">
@@ -120,18 +119,17 @@
                                                                                     {{ round($amount, 2) }}</div>
                                                                             @else
                                                                                 @if ($nutri_id == 'MACR001')
-                                                                                    {{ round($amount, 2) }}
+                                                                                    {{ round($amount, 2) }} kcal
                                                                                     @php
                                                                                         break;
                                                                                     @endphp
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        kcal
                                                                     </a>
                                                                 </li>
                                                                 <li class="list-group-item">
-                                                                    <b>Chất đạm (Protit):</b>
+                                                                    <b>Chất đạm (Protein):</b>
                                                                     <a class="float-right">
                                                                         @foreach ($meal['nutri'] as $nutri_id => $amount)
                                                                             @if ($amount == 0)
@@ -140,18 +138,36 @@
                                                                                     {{ round($amount, 2) }}</div>
                                                                             @else
                                                                                 @if ($nutri_id == 'MACR002')
-                                                                                    {{ round($amount, 2) }}
+                                                                                    {{ round($amount, 2) }} g
                                                                                     @php
                                                                                         break;
                                                                                     @endphp
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        kcal
                                                                     </a>
                                                                 </li>
                                                                 <li class="list-group-item">
-                                                                    <b>Chất bột đường (Gluxit):</b>
+                                                                    <b>Chất béo (Fat):</b>
+                                                                    <a class="float-right">
+                                                                        @foreach ($meal['nutri'] as $nutri_id => $amount)
+                                                                            @if ($amount == 0)
+                                                                                <div style="display: none;">
+                                                                                    {{ $nutri_id }}:
+                                                                                    {{ round($amount, 2) }}</div>
+                                                                            @else
+                                                                                @if ($nutri_id == 'MACR003')
+                                                                                    {{ round($amount, 2) }} g
+                                                                                    @php
+                                                                                        break;
+                                                                                    @endphp
+                                                                                @endif
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Chất bột đường (Carbohydrate):</b>
                                                                     <a class="float-right">
                                                                         @foreach ($meal['nutri'] as $nutri_id => $amount)
                                                                             @if ($amount == 0)
@@ -160,33 +176,26 @@
                                                                                     {{ round($amount, 2) }}</div>
                                                                             @else
                                                                                 @if ($nutri_id == 'MACR004')
-                                                                                    {{ round($amount, 2) }}
+                                                                                    {{ round($amount, 2) }} g
                                                                                     @php
                                                                                         break;
                                                                                     @endphp
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        kcal
                                                                     </a>
                                                                 </li>
 
                                                             </ul>
                                                             <a href="{{ route('foods.index') }}"
+                                                                onclick="checkMealCount({{ $index }})"
                                                                 class="btn btn-success btn-block"><b>Thêm vào thực
                                                                     đơn</b></a>
-                                                            {{-- <a href="{{ route('menus.store', compact('meal['meal']')) }}"
-                                                                class="btn btn-success btn-block"><b>Thêm vào thực
-                                                                    đơn</b></a> --}}
-                                                            {{-- <a href="{{ route('foods.show', ['id' => $meal['meal']['desserts']->id]) }}"
-                                                                class="btn btn-primary btn-block"><b>Xem chi
-                                                                    tiết</b></a> --}}
                                                         </div>
                                                         <!-- /.card-body -->
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            {{-- {{ $foods->links() }} --}}
                                         </div>
                                         <!-- /.card -->
                                     </div>
@@ -200,7 +209,8 @@
                                                     <label for="mealCount">Một ngày ăn mấy bữa:</label>
                                                     <input type="number" id="mealCount" name="meals_per_day"
                                                         class="form-control" placeholder="Tối đa 4 bữa" min="1"
-                                                        max="4" required value="{{ old('meals_per_day') }}">
+                                                        max="4" required
+                                                        value="{{ old('meals_per_day', auth()->user()->meals_per_day ?? '') }}">
                                                 </div>
 
                                                 <table class="table table-striped">
@@ -212,9 +222,6 @@
                                                             <th style="width: 40px">Đơn vị</th>
                                                         </tr>
                                                     </thead>
-
-                                                    <button type="submit" class="btn btn-info">Cập nhật dinh
-                                                        dưỡng</button>
                                                     <tbody>
                                                         @foreach ($needsUser as $index => $need)
                                                             <tr>
@@ -223,9 +230,6 @@
                                                                     @foreach ($nutris as $nutri)
                                                                         @if ($nutri->id == $need->nutri_id)
                                                                             {{ $nutri->name }}
-                                                                            @php
-                                                                                break;
-                                                                            @endphp
                                                                         @endif
                                                                     @endforeach
                                                                 </td>
@@ -241,35 +245,44 @@
                                                                         @foreach ($nutris as $nutri)
                                                                             @if ($nutri->id == $need->nutri_id)
                                                                                 {{ $nutri->unit }}
-                                                                                @php
-                                                                                    break;
-                                                                                @endphp
                                                                             @endif
                                                                         @endforeach
-                                                                    </span>
-                                                                    <input type="hidden"
-                                                                        name="nutri_needs[{{ $need->nutri_id }}][user_id]"
-                                                                        value="{{ $need->user_id }}">
-                                                                </td>
+                                                                    </span></td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </form>
-                                        <!-- /.card-body -->
                                     </div>
-                                    <!-- /.tab-pane -->
-
 
                                 </div>
-                                <!-- /.tab-content -->
-                            </div><!-- /.card-body -->
+                            </div>
                         </div>
-                        <!-- /.card -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        document.querySelector('.btn.btn-success.btn-block').addEventListener('click', function(e) {
+            e.preventDefault();
+            var mealId = this.dataset.mealId;
+            document.getElementById('meal_id').value = mealId;
+            document.getElementById('addMealForm').submit();
+        });
+
+        function checkMealCount(index) {
+            var mealCount = document.getElementById('mealCount').value;
+            if (mealCount == '' || mealCount == 0) {
+                alert('Vui lòng nhập số lượng bữa ăn trước khi thêm vào thực đơn.');
+                window.location.href = '#timeline';
+            } else {
+                document.getElementById('addMealForm-' + index).submit();
+            }
+        }
+    </script>
 @endsection
