@@ -39,8 +39,11 @@ Route::middleware('auth_admin')->prefix('admin')->group(function () {
     });
 });
 
+// Trang chủ
+Route::get('/', [UserController::class, 'home'])->name('home');
+
 // Đăng nhập tài khoản user
-Route::get('/', [UserController::class, 'index'])->name('login.index');
+Route::get('/userLogin', [UserController::class, 'index'])->name('login.index');
 Route::post('/login', [UserController::class, 'store'])->name('login.store');
 
 // Đăng kí tài khoản user

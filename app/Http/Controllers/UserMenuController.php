@@ -79,16 +79,13 @@ class UserMenuController extends Controller
         // Tạo bữa ăn từ các món ăn phân loại (Mặc định)
         $meals = $this->createMeals($categorizedFoods, $needsPerMeal, $timesFind, $toleranceMeal);
         // Thêm vào bảng oder_nutri (Mặc định)
+        dd($meals);
         $needsUser = $this->initialDailyNeeds($needs, $meals_per_day);
 
         // $foods = $this->foods->paginate(12);
         $nutris = $this->nutris->all();
         $nutriIds = ['MACR001', 'MACR002', 'MACR004'];
         $foodNutris = $this->foodNutris->whereIn('nutri_id', $nutriIds)->get();
-        $user = $this->user->find($userId);
-        $age = $user->age;
-        $gender = $user->gender;
-        $level = $user->level;
 
         return view('user.menus.index', compact('foodNutris', 'needsUser', 'nutris', 'meals'));
     }

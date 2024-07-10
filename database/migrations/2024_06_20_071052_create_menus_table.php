@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('food_id')->unsigned();
-            $table->string('is_meal');
-            $table->integer('location')->default(0);
+            $table->bigInteger('meal')->unsigned();
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();

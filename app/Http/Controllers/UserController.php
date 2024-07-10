@@ -74,4 +74,9 @@ class UserController extends Controller
 
         return redirect()->route('login.index')->with('success', 'Đăng xuất thành công!');
     }
+
+    public function home()
+    {
+        return view('home');
+    }
 }
