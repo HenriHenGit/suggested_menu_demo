@@ -133,7 +133,7 @@
                 </form>
                 <div class="social-auth-links text-center">
                     <p>- HOẶC -</p>
-                    <a href="{{ route('login.index') }}" class="btn btn-block btn-primary">Đăng nhập</a>
+                    <a href="{{ route('login') }}" class="btn btn-block btn-primary">Đăng nhập</a>
                 </div>
             </div>
         </div>
