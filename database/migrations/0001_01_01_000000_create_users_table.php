@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone')->nullable()->unique();
+            $table->string('phone')->nullable();
             $table->integer('age')->default(18);
             $table->boolean('gender')->default(true);
             $table->string('avatar')->nullable();

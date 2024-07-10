@@ -33,6 +33,6 @@ class AdminController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('adminLogin.login')->with('success', 'Đăng xuất thành công!');
+        return redirect()->route('home')->with('success', 'Đăng xuất thành công!');
     }
 }

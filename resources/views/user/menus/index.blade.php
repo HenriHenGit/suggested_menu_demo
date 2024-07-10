@@ -15,7 +15,7 @@
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
                                     <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Món
-                                            ăn</a></li>
+                                            ăn 2 bửa/ngày</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Thông tin
                                             dinh dưỡng của bạn</a>
                                     </li>
@@ -147,7 +147,7 @@
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        kcal
+                                                                        g
                                                                     </a>
                                                                 </li>
                                                                 <li class="list-group-item">
@@ -167,14 +167,14 @@
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        kcal
+                                                                        g
                                                                     </a>
                                                                 </li>
 
                                                             </ul>
-                                                            <a href="{{ route('foods.index') }}"
+                                                            {{-- <a href="{{ route('foods.index') }}"
                                                                 class="btn btn-success btn-block"><b>Thêm vào thực
-                                                                    đơn</b></a>
+                                                                    đơn</b></a> --}}
                                                             {{-- <a href="{{ route('menus.store', compact('meal['meal']')) }}"
                                                                 class="btn btn-success btn-block"><b>Thêm vào thực
                                                                     đơn</b></a> --}}

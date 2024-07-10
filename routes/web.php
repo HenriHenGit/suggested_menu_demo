@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminFoodController;
 use App\Http\Controllers\AdminIngredientController;
 use App\Http\Controllers\UserFoodController;
 use App\Http\Controllers\UserMenuController;
+use App\Http\Controllers\UserAccountController;
 
 // Đăng nhập tài khoản admin
 Route::get('/adminLogin', [AdminController::class, 'login'])->name('adminLogin.login');
@@ -61,8 +62,13 @@ Route::middleware('auth_user')->prefix('user')->group(function () {
     });
     Route::prefix('menus')->group(function () {
         Route::get('/', [UserMenuController::class, 'index'])->name('menus.index');
-        Route::post('/update', [UserMenuController::class, 'update'])->name('menus.update');
         Route::post('/store/{id}', [UserMenuController::class, 'store'])->name('menus.store');
         // Route::get('/show/{id}', [UserMenuController::class, 'show'])->name('menus.show');
+    });
+    Route::prefix('account')->group(function () {
+        Route::get('/', [UserAccountController::class, 'index'])->name('account.index');
+        Route::post('/update/{id}', [UserAccountController::class, 'update'])->name('account.update');
+        // Route::post('/store/{id}', [UserAccountController::class, 'store'])->name('menus.store');
+        // Route::get('/show/{id}', [UserAccountController::class, 'show'])->name('menus.show');
     });
 });

@@ -12,7 +12,17 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src={{ asset('images/img/avatarFemale.jpg') }} class="img-circle elevation-2" alt="User Image">
+                @php
+                    $userGender = session('userGender');
+                @endphp
+
+                @if ($userGender)
+                    <img src="{{ asset('images/img/avatarMale.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                @else
+                    <img src="{{ asset('images/img/avatarFemale.jpg') }}" class="img-circle elevation-2"
+                        alt="User Image">
+                @endif
+
             </div>
             <div class="info">
                 <a href="#" class="d-block">Trần Xuân Hiếu</a>
@@ -51,6 +61,13 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Đề xuất bữa ăn
+
+                        </p>
+                    </a>
+                    <a href="{{ route('account.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Tài khoản người dùng
 
                         </p>
                     </a>

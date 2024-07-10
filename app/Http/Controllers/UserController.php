@@ -48,7 +48,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'nullable|string|unique:users,phone|max:20',
-            'age' => 'required|integer|min:18|max:100',
+            'age' => 'required|integer|min:1|max:100',
             'gender' => 'required|in:0,1',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -79,7 +79,7 @@ class UserController extends Controller
             Cache::forget($cacheKey);
         }
 
-        return redirect()->route('login.index')->with('success', 'Đăng xuất thành công!');
+        return redirect()->route('home')->with('success', 'Đăng xuất thành công!');
     }
 
     public function home()
