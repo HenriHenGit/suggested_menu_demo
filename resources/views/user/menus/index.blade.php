@@ -193,70 +193,71 @@
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="timeline">
                                         <!-- /.card-header -->
-                                        <form action="{{ route('menus.update') }}" method="POST">
-                                            @csrf
-                                            <div class="card-body p-0">
-                                                <div class="form-group">
-                                                    <label for="mealCount">Một ngày ăn mấy bữa:</label>
+                                        {{-- <form action="{{ route('menus.update') }}" method="POST"> --}}
+                                        @csrf
+                                        <div class="card-body p-0">
+                                            <div class="form-group">
+                                                {{-- <label for="mealCount">Một ngày ăn mấy bữa:</label>
                                                     <input type="number" id="mealCount" name="meals_per_day"
                                                         class="form-control" placeholder="Tối đa 4 bữa" min="1"
-                                                        max="4" required value="{{ old('meals_per_day') }}">
-                                                </div>
-
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 10px">Stt</th>
-                                                            <th>Dinh dưỡng</th>
-                                                            <th>Hàm lượng</th>
-                                                            <th style="width: 40px">Đơn vị</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <button type="submit" class="btn btn-info">Cập nhật dinh
-                                                        dưỡng</button>
-                                                    <tbody>
-                                                        @foreach ($needsUser as $index => $need)
-                                                            <tr>
-                                                                <td>{{ $index + 1 }}</td>
-                                                                <td>
-                                                                    @foreach ($nutris as $nutri)
-                                                                        @if ($nutri->id == $need->nutri_id)
-                                                                            {{ $nutri->name }}
-                                                                            @php
-                                                                                break;
-                                                                            @endphp
-                                                                        @endif
-                                                                    @endforeach
-                                                                </td>
-                                                                <td>
-                                                                    <div class="form-group">
-                                                                        <input type="number" class="form-control"
-                                                                            name="nutri_needs[{{ $need->nutri_id }}][amount]"
-                                                                            value="{{ $need->amount }}" min="0"
-                                                                            step="any">
-                                                                    </div>
-                                                                </td>
-                                                                <td><span class="badge bg-success">
-                                                                        @foreach ($nutris as $nutri)
-                                                                            @if ($nutri->id == $need->nutri_id)
-                                                                                {{ $nutri->unit }}
-                                                                                @php
-                                                                                    break;
-                                                                                @endphp
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </span>
-                                                                    <input type="hidden"
-                                                                        name="nutri_needs[{{ $need->nutri_id }}][user_id]"
-                                                                        value="{{ $need->user_id }}">
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        max="4" required value="{{ old('meals_per_day') }}"> --}}
                                             </div>
-                                        </form>
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10px">Stt</th>
+                                                        <th>Dinh dưỡng</th>
+                                                        <th>Hàm lượng</th>
+                                                        <th style="width: 40px">Đơn vị</th>
+                                                    </tr>
+                                                </thead>
+
+                                                {{-- <button type="submit" class="btn btn-info">Cập nhật dinh
+                                                    dưỡng</button>
+                                                <tbody> --}}
+                                                @foreach ($needsUser as $index => $need)
+                                                    <tr>
+                                                        <td>{{ $index + 1 }}</td>
+                                                        <td>
+                                                            @foreach ($nutris as $nutri)
+                                                                @if ($nutri->id == $need->nutri_id)
+                                                                    {{ $nutri->name }}
+                                                                    @php
+                                                                        break;
+                                                                    @endphp
+                                                                @endif
+                                                            @endforeach
+                                                        </td>
+                                                        <td>
+                                                            {{-- <div class="form-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="nutri_needs[{{ $need->nutri_id }}][amount]"
+                                                                    value="{{ $need->amount }}" min="0"
+                                                                    step="any">
+                                                            </div> --}}
+                                                            {{ $need->amount }}
+                                                        </td>
+                                                        <td><span class="badge bg-success">
+                                                                @foreach ($nutris as $nutri)
+                                                                    @if ($nutri->id == $need->nutri_id)
+                                                                        {{ $nutri->unit }}
+                                                                        @php
+                                                                            break;
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                            </span>
+                                                            <input type="hidden"
+                                                                name="nutri_needs[{{ $need->nutri_id }}][user_id]"
+                                                                value="{{ $need->user_id }}">
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {{-- </form> --}}
                                         <!-- /.card-body -->
                                     </div>
                                     <!-- /.tab-pane -->

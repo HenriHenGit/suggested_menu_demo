@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
@@ -71,6 +72,12 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        $userId = session('userId');
+        if ($userId) {
+            $cacheKey = 'meal_' . $userId;
+            Cache::forget($cacheKey);
+        }
 
         return redirect()->route('login.index')->with('success', 'Đăng xuất thành công!');
     }
