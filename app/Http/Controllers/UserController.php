@@ -30,7 +30,7 @@ class UserController extends Controller
 
             return redirect()->route('foods.index')->with('success', 'Đăng nhập thành công!');
         } else {
-            return redirect()->route('login.index')->with('error', 'Email hoặc mật khẩu không đúng.');
+            return redirect()->route('login')->with('error', 'Email hoặc mật khẩu không đúng.');
         }
     }
 

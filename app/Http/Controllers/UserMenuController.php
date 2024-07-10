@@ -103,11 +103,10 @@ class UserMenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   //  public function store(Request $request, $id)
-   // {
-    //    dd($request);
-   // }
-    
+    public function store(Request $request, $id)
+    {
+        dd($request);
+    }
 
     /**
      * Display the specified resource.
@@ -124,51 +123,12 @@ class UserMenuController extends Controller
     {
         //
     }
-    public function update(Request $request)
-    {
-        $request->validate([
-            'meals_per_day' => 'required|integer|min:1|max:4',
-        ]);
 
-        // Update the user's meal count in the database
-        auth()->user()->update(['meals_per_day' => $request->meals_per_day]);
-
-        return redirect()->back()->with('success', 'Meal count updated successfully!');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'meal_id' => 'required|integer|exists:meals,id',
-        ]);
-
-        $mealCount = auth()->user()->meals_per_day;
-        $currentMealCount = Menu::where('user_id', auth()->id())->count();
-
-        if (!$mealCount || $mealCount == 0) {
-            return redirect()->route('menus.index')->with('error', 'Please update your meal count before adding meals.');
-        }
-
-        if ($currentMealCount < $mealCount) {
-            Menu::create([
-                'user_id' => auth()->id(),
-                'meal_id' => $request->meal_id,
-            ]);
-
-            $currentMealCount++;
-        }
-
-        if ($currentMealCount >= $mealCount) {
-            return redirect()->route('menus.index')->with('success', 'All meals added to the menu!');
-        }
-
-        return redirect()->back()->with('success', 'Meal added successfully!');
-    }
     /**
      * Update the specified resource in storage.
      */
     // Cập nhật nhu cầu dinh dưỡng người dùng
-    /**public function update(Request $request)
+    public function update(Request $request)
     {
         $validatedData = $request->validate([
             'nutri_needs' => 'required|array',
@@ -188,7 +148,7 @@ class UserMenuController extends Controller
         $meals_per_day = $request->input('meals_per_day');
 
         return redirect()->route('menus.index', compact('meals_per_day'));
-    }**/
+    }
 
     /**
      * Remove the specified resource from storage.
