@@ -1,4 +1,4 @@
-<div class="demo-header posa top-0 left-0 w-100 py-lg-4 py-3 z-index-10">
+<div class="header posa top-0 left-0 w-100 py-lg-4 py-3 z-index-10">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xs-12">
