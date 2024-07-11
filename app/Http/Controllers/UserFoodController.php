@@ -93,17 +93,30 @@ class UserFoodController extends Controller
 
     private function insertUserDetail($orderNutris, $userId)
     {
-        $data = User_detail::where('user_id', $userId)->first();
-        if (!isset($data)) {
-            foreach ($orderNutris as $orderNutri) {
-                $order_nutri = new User_detail;
-                $order_nutri->user_id = $userId;
-                $order_nutri->nutri_id = $orderNutri->nutri_id;
-                $order_nutri->amount = $orderNutri->amount;
-                $order_nutri->save();
+        foreach ($orderNutris as $orderNutri) {
+
+            $existingRecord = User_detail::where('user_id', $userId)
+                ->where('nutri_id', $orderNutri->nutri_id)
+                ->first();
+
+            if ($existingRecord) {
+
+                $existingRecord->amount = $orderNutri->amount;
+                $existingRecord->updated_at = now();
+                $existingRecord->save();
+            } else {
+
+                $newRecord = new User_detail;
+                $newRecord->user_id = $userId;
+                $newRecord->nutri_id = $orderNutri->nutri_id;
+                $newRecord->amount = $orderNutri->amount;
+                $newRecord->created_at = now();
+                $newRecord->updated_at = now();
+                $newRecord->save();
             }
         }
     }
+
     /**
      * Display a listing of the resource.
      */

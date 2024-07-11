@@ -33,7 +33,6 @@ class UserAccountController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,

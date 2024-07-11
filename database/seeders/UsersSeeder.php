@@ -37,7 +37,7 @@ class UsersSeeder extends Seeder
             ],
             [
                 'name' => 'Võ Thành Trung',
-                'email' => 'a0306211310@caothang.edu.vn',
+                'email' => '0306211310@caothang.edu.vn',
                 'phone' => '0372010220',
                 'age' => 1,
                 'gender' => 0,
