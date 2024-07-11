@@ -42,10 +42,11 @@ class UserMenuController extends Controller
         $this->stepRecipes = $stepRecipes;
         $this->userDetail = $userDetail;
         $this->menus = $menus;
-        $userId = session('userId');
+        // $userId = session('userId');
         // $this->meals = Cache::get('meal_' . $userId);
-        $this->meals = $this->handl();
-        $this->MenuInDay($userId);
+        // $this->meals = $this->handl();
+        // dd($userId);
+
     }
 
 
@@ -117,6 +118,19 @@ class UserMenuController extends Controller
         //
     }
 
+    public function demoIndex()
+    {
+        $userId = session('userId');
+        $meals = $this->MenuInDay($userId);
+
+        $userDetail = $this->userDetail->where('user_id', $userId)->get();
+        $nutris = $this->nutris->where('id', '!=', '0')->get();
+
+        // dd($meals);
+
+        return view('user.menus.demoIndex', compact('meals', 'userDetail', 'nutris'));
+    }
+
     private function MenuInDay($userId, $sl = 3)
     {
         $meals = [];
@@ -147,12 +161,20 @@ class UserMenuController extends Controller
         // Tách meals thành các phần nhỏ hơn
         $splitMeals = array_chunk($meals, $sl, true);
         $combinedMeals = [];
+
+        // Lấy dữ liệu từ bảng User_detail
+        $userDetails = $this->userDetail->where('user_id', $userId)->get();
+        $userNutriAmounts = [];
+        foreach ($userDetails as $detail) {
+            $userNutriAmounts[$detail->nutri_id] = $detail->amount;
+        }
+
         foreach ($splitMeals as $mealChunk) {
             $combinedMeal = [
                 'meal' => [],
-                'nutris' => []
+                'nutris' => [],
+                'diff' => []
             ];
-
             foreach ($mealChunk as $mealIndex => $meal) {
                 // Tổng hợp bữa ăn từ các bữa ăn lại thành 1 bữa/ngày
                 $combinedMeal['meal'] = array_merge($combinedMeal['meal'], $meal);
@@ -164,6 +186,15 @@ class UserMenuController extends Controller
                             $combinedMeal['nutris'][$nutriId] = 0;
                         }
                         $combinedMeal['nutris'][$nutriId] += round($nutriAmount, 2);
+
+                        // Tính toán chênh lệch phần trăm
+                        $userAmount = isset($userNutriAmounts[$nutriId]) ? $userNutriAmounts[$nutriId] : 0;
+                        if ($userAmount > 0) {
+                            $percentDiff = (($combinedMeal['nutris'][$nutriId] - $userAmount) / $userAmount) * 100;
+                        } else {
+                            $percentDiff = 0;
+                        }
+                        $combinedMeal['diff'][$nutriId] = round($percentDiff, 2);
                     }
                 }
             }
@@ -171,10 +202,11 @@ class UserMenuController extends Controller
             $combinedMeals[] = $combinedMeal;
         }
 
-        dd($combinedMeals);
+        // dd($combinedMeals);
 
         return $combinedMeals;
     }
+
 
 
 

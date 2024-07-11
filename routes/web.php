@@ -59,11 +59,11 @@ Route::middleware('auth_user')->prefix('user')->group(function () {
     Route::prefix('foods')->group(function () {
         Route::get('/', [UserFoodController::class, 'index'])->name('foods.index');
         Route::get('/show/{id}', [UserFoodController::class, 'show'])->name('foods.show');
-
     });
     Route::prefix('menus')->group(function () {
         Route::get('/', [UserMenuController::class, 'index'])->name('menus.index');
         Route::post('/store/{id}', [UserMenuController::class, 'store'])->name('menus.store');
+        Route::get('/demoIndex', [UserMenuController::class, 'demoIndex'])->name('menus.demoIndex');
         // Route::get('/show/{id}', [UserMenuController::class, 'show'])->name('menus.show');
     });
     Route::prefix('account')->group(function () {
@@ -73,4 +73,3 @@ Route::middleware('auth_user')->prefix('user')->group(function () {
         // Route::get('/show/{id}', [UserAccountController::class, 'show'])->name('menus.show');
     });
 });
-

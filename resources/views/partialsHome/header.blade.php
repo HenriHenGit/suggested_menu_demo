@@ -24,7 +24,7 @@
 
             </div>
             <div class="col-lg-3 d-lg-block d-none text-end col-md-6 col-xs-6">
-                <a href="{{ asset('login') }}"
+                <a href="{{ route('login.index') }}"
                     class="bg-success btn btn-lg p-2 lh-28 d-inline-block rounded-25 font-xsssss fw-700 ls-3 text-white w-150">Bắt
                     đầu nào!</a>
             </div>

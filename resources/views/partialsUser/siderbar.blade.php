@@ -68,6 +68,13 @@
 
                         </p>
                     </a>
+                    <a href="{{ route('menus.demoIndex') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Đề xuất bữa ăn 2
+
+                        </p>
+                    </a>
                     <a href="{{ route('account.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>

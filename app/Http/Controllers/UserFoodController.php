@@ -52,8 +52,8 @@ class UserFoodController extends Controller
 
         $userMenu = $this->menus->where('user_id', $userId)->get();
 
-        if (!$userMenu) {
-            $meals = $this->handl(3);
+        if ($userMenu->isEmpty()) {
+            $meals = $this->handl(3, -400, 1000);
             foreach ($meals as $index => $meal) {
                 if (isset($meal['meal']['main_dishes'])) {
                     $menu = new Menu();
@@ -78,6 +78,7 @@ class UserFoodController extends Controller
                 }
             }
         }
+
         // if ($userId) {
         //     $cacheKey = 'meal_' . $userId;
 
@@ -209,18 +210,11 @@ class UserFoodController extends Controller
         }
     }
 
-    private function handl($meals_per_day = 2)
+    private function handl($meals_per_day = 2, $toleranceMeal = 3000, $timesFind = 100)
     {
 
         // Nhận request id của người dùng (demo vd: 2)
         $userId = session('userId');;
-        // Số lần lập tạo ra bữa ăn (Tối thiểu là 20,...)
-        $timesFind = 100;
-        // Tìm chính xác theo nhu cầu dinh dưỡng (Tối thiểu là 600->1000...)
-        $toleranceMeal = 900;
-
-        // Số lần bữa ăn trong 1 ngày (Có thể sửa)
-        $meals_per_day = 2; // (Có thể sửa)
 
         $userDetail = $this->userDetail->where('user_id', $userId)->get();
         $needs = $userDetail;
