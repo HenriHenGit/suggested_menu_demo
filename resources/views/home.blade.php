@@ -19,7 +19,7 @@
 
         @include('partialsHome.header')
 
-        <div class="demo-banner" id="banner">
+        <div class="demo-banner " id="banner">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5 text-center mt-lg-5 content-text">

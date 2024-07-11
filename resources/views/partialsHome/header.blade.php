@@ -6,7 +6,7 @@
                     <a href="{{ asset(' ') }}"><img src="images/img/logo.jpg" alt="logo" class="logo"></a>
                     <ul class="navbar-nav list-inline">
                         <li class="nav-item list-inline-item">
-                            <a class="active" href="#banner">Trang chủ</a>
+                            <a class="active" href=" ">Trang chủ</a>
                         </li>
                         <li class="nav-item list-inline-item">
                             <a href="#contact">Thông tin</a>
