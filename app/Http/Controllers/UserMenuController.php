@@ -45,6 +45,7 @@ class UserMenuController extends Controller
         $userId = session('userId');
         // $this->meals = Cache::get('meal_' . $userId);
         $this->meals = $this->handl();
+        $this->MenuInDay($userId);
     }
 
 
@@ -115,9 +116,78 @@ class UserMenuController extends Controller
     {
         //
     }
+
+    private function MenuInDay($userId, $sl = 3)
+    {
+        $meals = [];
+        $mealNutri = [];
+
+        $menus = $this->menus->where('user_id', $userId)->get();
+        $foods = $this->foods->all();
+
+        foreach ($menus as $menu) {
+            foreach ($foods as $food) {
+                if ($food->id == $menu->food_id) {
+                    // Thêm món ăn vào meals
+                    $meals[$menu->meal][] = $food;
+
+                    // Tính toán giá trị dinh dưỡng của bữa ăn
+                    $foodNutri = $this->foodNutris->where('food_id', $food->id)->get();
+                    foreach ($foodNutri as $nutri) {
+                        if (!isset($mealNutri[$menu->meal][$nutri->nutri_id])) {
+                            $mealNutri[$menu->meal][$nutri->nutri_id] = 0;
+                        }
+                        $mealNutri[$menu->meal][$nutri->nutri_id] += round($nutri->amount) / $food->number_eat;
+                    }
+                    break;
+                }
+            }
+        }
+
+        // Tách meals thành các phần nhỏ hơn
+        $splitMeals = array_chunk($meals, $sl, true);
+        $combinedMeals = [];
+        foreach ($splitMeals as $mealChunk) {
+            $combinedMeal = [
+                'meal' => [],
+                'nutris' => []
+            ];
+
+            foreach ($mealChunk as $mealIndex => $meal) {
+                // Tổng hợp bữa ăn từ các bữa ăn lại thành 1 bữa/ngày
+                $combinedMeal['meal'] = array_merge($combinedMeal['meal'], $meal);
+
+                // Tính toán các chất dinh dưỡng 1 bữa/ngày
+                if (isset($mealNutri[$mealIndex])) {
+                    foreach ($mealNutri[$mealIndex] as $nutriId => $nutriAmount) {
+                        if (!isset($combinedMeal['nutris'][$nutriId])) {
+                            $combinedMeal['nutris'][$nutriId] = 0;
+                        }
+                        $combinedMeal['nutris'][$nutriId] += round($nutriAmount, 2);
+                    }
+                }
+            }
+
+            $combinedMeals[] = $combinedMeal;
+        }
+
+        dd($combinedMeals);
+
+        return $combinedMeals;
+    }
+
+
+
+
+
+
+
+
+
+
     private function handl()
     {
-        // Nhận request id của người dùng (demo vd: 2)
+
         $userId = session('userId');;
         // Số lần lập tạo ra bữa ăn (Tối thiểu là 20,...)
         $timesFind = 100;
