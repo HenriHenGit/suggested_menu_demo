@@ -70,7 +70,7 @@ class UserAccountController extends Controller
                 ->get();
             $this->updateUserDetail($orderNutris, $userId);
         }
-
+        
         session(['userGender' => $userGender]);
         session(['userName' => $userName]);
         if ($userId) {
@@ -104,4 +104,5 @@ class UserAccountController extends Controller
             }
         }
     }
+    
 }

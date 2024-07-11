@@ -26,9 +26,9 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $userId = Auth::user()->id;
-
             session(['userId' => $userId]);
-
+            $user = Auth::user()->name;
+            session(['user' => $user]);
             return redirect()->route('foods.index')->with('success', 'Đăng nhập thành công!');
         } else {
             return redirect()->route('login.index')->with('error', 'Email hoặc mật khẩu không đúng.');
