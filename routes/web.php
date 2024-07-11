@@ -59,6 +59,7 @@ Route::middleware('auth_user')->prefix('user')->group(function () {
     Route::prefix('foods')->group(function () {
         Route::get('/', [UserFoodController::class, 'index'])->name('foods.index');
         Route::get('/show/{id}', [UserFoodController::class, 'show'])->name('foods.show');
+
     });
     Route::prefix('menus')->group(function () {
         Route::get('/', [UserMenuController::class, 'index'])->name('menus.index');
@@ -72,3 +73,4 @@ Route::middleware('auth_user')->prefix('user')->group(function () {
         // Route::get('/show/{id}', [UserAccountController::class, 'show'])->name('menus.show');
     });
 });
+
