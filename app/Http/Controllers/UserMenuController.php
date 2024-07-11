@@ -53,7 +53,7 @@ class UserMenuController extends Controller
      */
     public function index(Request $request)
     {
-        // Nhận request id của người dùng (demo vd: 2)
+
         $userId = session('userId');
 
         $needsUser = $this->userDetail->where('user_id', $userId)->get();

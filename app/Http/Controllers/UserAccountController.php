@@ -55,6 +55,7 @@ class UserAccountController extends Controller
 
         $userId = $user->id;
         $userGender = $user->gender;
+        $userName = $user->name;
 
         if ($userId) {
             $user = User::find($userId);
@@ -71,6 +72,7 @@ class UserAccountController extends Controller
         }
 
         session(['userGender' => $userGender]);
+        session(['userName' => $userName]);
         if ($userId) {
             $cacheKey = 'meal_' . $userId;
 

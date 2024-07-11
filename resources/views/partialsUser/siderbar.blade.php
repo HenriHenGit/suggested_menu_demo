@@ -25,7 +25,11 @@
 
             </div>
             <div class="info">
-                <a href="#" class="d-block">Trần Xuân Hiếu</a>
+                <a href="#" class="d-block">
+                    @php
+                        $userName = session('userName');
+                    @endphp
+                    {{ $userName }}</a>
             </div>
         </div>
 

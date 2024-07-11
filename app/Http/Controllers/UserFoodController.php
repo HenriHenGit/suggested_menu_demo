@@ -47,7 +47,8 @@ class UserFoodController extends Controller
 
         $user = User::find($userId);
         $userGender = $user->gender;
-        session(['userGender' => $userGender]);
+        $userName = $user->name;
+        session(['userGender' => $userGender, 'userName' => $userName]);
 
         // if ($userId) {
         //     $cacheKey = 'meal_' . $userId;
@@ -65,57 +66,6 @@ class UserFoodController extends Controller
     }
 
 
-    // private function handl()
-    // {
-
-    //     // Nhận request id của người dùng (demo vd: 2)
-    //     $userId = session('userId');;
-    //     // Số lần lập tạo ra bữa ăn (Tối thiểu là 20,...)
-    //     $timesFind = 100;
-    //     // Tìm chính xác theo nhu cầu dinh dưỡng (Tối thiểu là 600->1000...)
-    //     $toleranceMeal = 900;
-
-    //     // Số lần bữa ăn trong 1 ngày (Có thể sửa)
-    //     $meals_per_day = 2; // (Có thể sửa)
-
-    //     $userDetail = $this->userDetail->where('user_id', $userId)->get();
-    //     $needs = $userDetail;
-    //     // // Chia nhu cầu dinh dưỡng thành các bữa ăn (Mặc định)
-    //     $needsPerMeal = $this->divideDailyNeeds($needs, $meals_per_day);
-    //     // Lấy thông tin món ăn từ bảng food và phân loại (Mặc định)
-    //     $categorizedFoods = $this->getFoods();
-
-    //     // Tạo bữa ăn từ các món ăn phân loại (Mặc định)
-    //     $meals = $this->createMeals($categorizedFoods, $needsPerMeal, $timesFind, $toleranceMeal);
-
-    //     return $meals;
-    // }
-
-    private function insertUserDetail($orderNutris, $userId)
-    {
-        foreach ($orderNutris as $orderNutri) {
-
-            $existingRecord = User_detail::where('user_id', $userId)
-                ->where('nutri_id', $orderNutri->nutri_id)
-                ->first();
-
-            if ($existingRecord) {
-
-                $existingRecord->amount = $orderNutri->amount;
-                $existingRecord->updated_at = now();
-                $existingRecord->save();
-            } else {
-
-                $newRecord = new User_detail;
-                $newRecord->user_id = $userId;
-                $newRecord->nutri_id = $orderNutri->nutri_id;
-                $newRecord->amount = $orderNutri->amount;
-                $newRecord->created_at = now();
-                $newRecord->updated_at = now();
-                $newRecord->save();
-            }
-        }
-    }
 
     /**
      * Display a listing of the resource.
@@ -204,6 +154,58 @@ class UserFoodController extends Controller
     {
         //
     }
+
+    private function insertUserDetail($orderNutris, $userId)
+    {
+        foreach ($orderNutris as $orderNutri) {
+
+            $existingRecord = User_detail::where('user_id', $userId)
+                ->where('nutri_id', $orderNutri->nutri_id)
+                ->first();
+
+            if ($existingRecord) {
+
+                $existingRecord->amount = $orderNutri->amount;
+                $existingRecord->updated_at = now();
+                $existingRecord->save();
+            } else {
+
+                $newRecord = new User_detail;
+                $newRecord->user_id = $userId;
+                $newRecord->nutri_id = $orderNutri->nutri_id;
+                $newRecord->amount = $orderNutri->amount;
+                $newRecord->created_at = now();
+                $newRecord->updated_at = now();
+                $newRecord->save();
+            }
+        }
+    }
+
+    // private function handl()
+    // {
+
+    //     // Nhận request id của người dùng (demo vd: 2)
+    //     $userId = session('userId');;
+    //     // Số lần lập tạo ra bữa ăn (Tối thiểu là 20,...)
+    //     $timesFind = 100;
+    //     // Tìm chính xác theo nhu cầu dinh dưỡng (Tối thiểu là 600->1000...)
+    //     $toleranceMeal = 900;
+
+    //     // Số lần bữa ăn trong 1 ngày (Có thể sửa)
+    //     $meals_per_day = 2; // (Có thể sửa)
+
+    //     $userDetail = $this->userDetail->where('user_id', $userId)->get();
+    //     $needs = $userDetail;
+    //     // // Chia nhu cầu dinh dưỡng thành các bữa ăn (Mặc định)
+    //     $needsPerMeal = $this->divideDailyNeeds($needs, $meals_per_day);
+    //     // Lấy thông tin món ăn từ bảng food và phân loại (Mặc định)
+    //     $categorizedFoods = $this->getFoods();
+
+    //     // Tạo bữa ăn từ các món ăn phân loại (Mặc định)
+    //     $meals = $this->createMeals($categorizedFoods, $needsPerMeal, $timesFind, $toleranceMeal);
+
+    //     return $meals;
+    // }
 
     // private function divideDailyNeeds($needs, $meals_per_day)
     // {

@@ -73,11 +73,11 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        $userId = session('userId');
-        if ($userId) {
-            $cacheKey = 'meal_' . $userId;
-            Cache::forget($cacheKey);
-        }
+        // $userId = session('userId');
+        // if ($userId) {
+        //     $cacheKey = 'meal_' . $userId;
+        //     Cache::forget($cacheKey);
+        // }
 
         return redirect()->route('home')->with('success', 'Đăng xuất thành công!');
     }
