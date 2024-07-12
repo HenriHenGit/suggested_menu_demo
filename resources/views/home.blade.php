@@ -10,7 +10,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.ico') }}">
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style-home.css') }}">
 
 </head>
 
@@ -29,7 +29,7 @@
                         <h1 class="text-white">THỰC ĐƠN DÀNH CHO BẠN</h1>
                         <p class="fw-500 text-grey-500 pt-2 pb-2">Bạn đang muốn thay đổi cân nặng bản thân, bạn đang
                             muốn tìm kiếm thực đơn phù hợp cho mình gia đình của bạn</p>
-                        <form method="POST" action="{{ route('login.store') }}">
+                        <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <a href="{{ route('login.index') }}"
                                 class="bg-success btn btn-lg p-3 rounded-6 font-xsssss fw-700 ls-3 text-white w-175 text-uppercase">Bắt

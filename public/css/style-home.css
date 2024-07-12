@@ -1,0 +1,451 @@
+/*header*/
+/* Demo Header */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0; /* Khoảng cách giữa header và nội dung */
+    z-index: 10;
+    background-color: #65e06f; /* Màu nền của header */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho header */
+}
+
+.logo {
+    max-width: 100px; /* Giảm kích thước của logo */
+    height: auto;
+    display: block;
+}
+
+.navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center; /* Căn giữa các mục trong navbar theo chiều ngang */
+    list-style-type: none; /* Loại bỏ dấu chấm */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 10px; /* Khoảng cách giữa các mục trong navbar */
+}
+
+.navbar-nav .nav-item a {
+    color: #ffffff; /* Màu chữ cho các mục trong navbar */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Hiệu ứng khi hover */
+    padding: 8px 15px; /* Khoảng cách từ chữ đến viền */
+    border: 1px solid transparent; /* Viền mặc định */
+    border-radius: 6px; /* Bo tròn góc */
+}
+
+.navbar-nav .nav-item a.active {
+    color: #ffffff; /* Màu chữ cho mục đang active */
+}
+
+.navbar-nav .nav-item a:hover {
+    background-color: #02800f; /* Màu nền khi hover */
+}
+
+.navbar-nav .nav-item:not(:last-child) {
+    margin-right: 15px; /* Khoảng cách giữa các mục trong navbar, trừ mục cuối */
+}
+
+
+
+
+
+
+
+
+
+/* Custom Stylesheet */
+.color-theme-green {
+    /* Thay đổi màu chủ đạo thành màu xanh lá cây */
+    --primary-color: #4CAF50;
+}
+
+.mont-font {
+    /* Sử dụng font Montserrat */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.demo-style {
+    /* Thêm các điều chỉnh cho demo-style */
+    background-color: #f5f5f5;
+    /* Màu nền */
+    color: #333;
+    /* Màu chữ chính */
+}
+
+.demo-banner {
+    /* Các điều chỉnh cho banner */
+    padding: 100px 0;
+    text-align: center;
+    max-width: 100%;
+    height: auto;
+    background-image: url('/images/banners/banner.jpg'); /* Đường dẫn tới hình ảnh banner */
+    background-size: cover; /* Đảm bảo hình ảnh cover toàn bộ phần nền */
+    background-position: center; /* Căn giữa hình ảnh */
+    color: #fff; /* Màu chữ trên banner */
+}
+
+.content-text {
+    /* Các điều chỉnh cho nội dung chính */
+    padding-top: 50px;
+}
+
+.content-text h1 {
+    /* Điều chỉnh tiêu đề */
+    font-size: 3rem;
+    /* Kích thước font chữ */
+    font-weight: bold;
+}
+
+.content-text p {
+    /* Điều chỉnh đoạn văn */
+    font-size: 1.2rem;
+}
+
+.btn {
+    /* Điều chỉnh nút */
+    background-color: var(--primary-color);
+    /* Màu nền */
+    color: #fff;
+    /* Màu chữ */
+    padding: 12px 24px;
+    /* Kích thước nút */
+    border-radius: 6px;
+    /* Bo tròn góc */
+    font-weight: bold;
+    /* Đậm */
+    text-transform: uppercase;
+    /* In hoa */
+    cursor: pointer;
+    /* Con trỏ */
+}
+
+.btn:hover {
+    /* Đổi màu khi hover */
+    background-color: #45a049;
+}
+
+.modal-content {
+    /* Điều chỉnh nội dung modal */
+    background-color: #fff;
+    /* Màu nền */
+    padding: 20px;
+    /* Khoảng cách lề */
+    border: 1px solid #ccc;
+    /* Viền */
+    border-radius: 8px;
+    /* Bo tròn góc */
+    text-align: center;
+}
+
+.modal h2 {
+    /* Điều chỉnh tiêu đề modal */
+    font-size: 1.5rem;
+}
+
+.close {
+    /* Điều chỉnh nút đóng */
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    /* Đổi màu khi hover */
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Custom Stylesheet */
+.color-theme-green {
+    /* Thay đổi màu chủ đạo thành màu xanh lá cây */
+    --primary-color: #4CAF50;
+}
+
+.mont-font {
+    /* Sử dụng font Montserrat */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.demo-style {
+    /* Thêm các điều chỉnh cho demo-style */
+    background-color: #f5f5f5;
+    /* Màu nền */
+    color: #333;
+    /* Màu chữ chính */
+}
+
+.demo-banner {
+    /* Các điều chỉnh cho banner */
+    padding: 100px 0;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.content-text {
+    /* Các điều chỉnh cho nội dung chính */
+    padding-top: 50px;
+}
+
+.content-text h1 {
+    /* Điều chỉnh tiêu đề */
+    font-size: 3rem;
+    /* Kích thước font chữ */
+    font-weight: bold;
+}
+
+.content-text p {
+    /* Điều chỉnh đoạn văn */
+    font-size: 1.2rem;
+}
+
+.btn {
+    /* Điều chỉnh nút */
+    background-color: var(--primary-color);
+    /* Màu nền */
+    color: #fff;
+    /* Màu chữ */
+    padding: 12px 24px;
+    /* Kích thước nút */
+    border-radius: 6px;
+    /* Bo tròn góc */
+    font-weight: bold;
+    /* Đậm */
+    text-transform: uppercase;
+    /* In hoa */
+    cursor: pointer;
+    /* Con trỏ */
+}
+
+.btn:hover {
+    /* Đổi màu khi hover */
+    background-color: #45a049;
+}
+
+.modal-content {
+    /* Điều chỉnh nội dung modal */
+    background-color: #fff;
+    /* Màu nền */
+    padding: 20px;
+    /* Khoảng cách lề */
+    border: 1px solid #ccc;
+    /* Viền */
+    border-radius: 8px;
+    /* Bo tròn góc */
+    text-align: center;
+}
+
+.modal h2 {
+    /* Điều chỉnh tiêu đề modal */
+    font-size: 1.5rem;
+}
+.text-green{
+    color: #4CAF50
+}
+.close {
+    /* Điều chỉnh nút đóng */
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    /* Đổi màu khi hover */
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+/* footer */
+.footer {
+    background-color: #65e06f; /* Màu nền của footer */
+    padding: 20px 0; /* Khoảng cách padding top và bottom */
+    box-shadow: 0 -2px 4px rgb(255, 255, 255); /* Đổ bóng cho footer */
+}
+
+.footer h2 {
+    font-size: 1.5rem; /* Kích thước tiêu đề */
+    font-weight: 700; /* Độ đậm */
+    margin-top: 1rem; /* Khoảng cách từ top xuống */
+    margin-bottom: 1rem; /* Khoảng cách từ bottom lên */
+    text-align: center; /* Căn giữa văn bản */
+}
+
+.footer p {
+    font-size: 1rem; /* Kích thước phần đoạn văn */
+    margin-left: 2rem; /* Khoảng cách bên trái */
+    margin-right: 2rem; /* Khoảng cách bên phải */
+    text-align: center; /* Căn giữa văn bản */
+}
+
+.footer .btn {
+    color: #fff; /* Màu chữ của nút */
+    padding: 12px 24px;
+    text-align: center; /* Căn giữa văn bản */
+    display: inline-block; /* Để nút hiển thị trên cùng một dòng */
+    margin-top: 10px; /* Khoảng cách từ trên xuống */
+}
+
+.footer .btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+/* Thiết lập cho các thiết bị di động (điện thoại) */
+@media (max-width: 576px) {
+    .header {
+        padding: 15px 0; /* Giảm khoảng cách giữa header và nội dung */
+    }
+
+    .logo {
+        max-width: 60px; /* Giảm kích thước của logo */
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Đổi hướng dàn dọc cho menu */
+    }
+
+    .navbar-nav .nav-item {
+        margin: 5px 0; /* Giảm khoảng cách giữa các mục trong menu */
+    }
+
+    .navbar-nav .nav-item a {
+        padding: 10px 15px; /* Giảm padding của các mục menu */
+    }
+}
+
+/* Thiết lập cho các thiết bị tablet và laptop nhỏ */
+@media (min-width: 577px) and (max-width: 992px) {
+    .header {
+        padding: 20px 0; /* Khoảng cách header và nội dung */
+    }
+
+    .logo {
+        max-width: 80px; /* Kích thước logo */
+    }
+
+    .navbar-nav {
+        flex-direction: row; /* Đổi lại hướng dàn ngang cho menu */
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0 10px; /* Khoảng cách giữa các mục menu */
+    }
+
+    .navbar-nav .nav-item a {
+        padding: 8px 15px; /* Kích thước padding của mỗi mục menu */
+    }
+}
+
+/* Thiết lập cho các thiết bị laptop lớn và desktop */
+@media (min-width: 993px) {
+    .header {
+        padding: 30px 0; /* Khoảng cách header và nội dung */
+    }
+
+    .logo {
+        max-width: 100px; /* Kích thước logo */
+    }
+
+    .navbar-nav {
+        flex-direction: row; /* Dàn menu theo hàng ngang */
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0 15px; /* Khoảng cách giữa các mục menu */
+    }
+
+    .navbar-nav .nav-item a {
+        padding: 12px 20px; /* Kích thước padding của mỗi mục menu */
+    }
+}
+
+/* Thiết lập cho các thiết bị di động (điện thoại) */
+@media (max-width: 576px) {
+    .footer {
+        padding: 15px 0; /* Giảm khoảng cách padding top và bottom */
+    }
+
+    .footer h2 {
+        font-size: 1.2rem; /* Giảm kích thước tiêu đề */
+    }
+
+    .footer p {
+        font-size: 0.9rem; /* Giảm kích thước phần đoạn văn */
+    }
+
+    .footer .btn {
+        padding: 10px 20px; /* Kích thước nút */
+        margin-top: 5px; /* Khoảng cách từ trên xuống */
+    }
+}
+
+/* Thiết lập cho các thiết bị tablet và laptop nhỏ */
+@media (min-width: 577px) and (max-width: 992px) {
+    .footer {
+        padding: 20px 0; /* Khoảng cách padding top và bottom */
+    }
+
+    .footer h2 {
+        font-size: 1.3rem; /* Kích thước tiêu đề */
+    }
+
+    .footer p {
+        font-size: 1rem; /* Kích thước phần đoạn văn */
+    }
+
+    .footer .btn {
+        padding: 12px 24px; /* Kích thước nút */
+        margin-top: 10px; /* Khoảng cách từ trên xuống */
+    }
+}
+
+/* Thiết lập cho các thiết bị laptop lớn và desktop */
+@media (min-width: 993px) {
+    .footer {
+        padding: 30px 0; /* Khoảng cách padding top và bottom */
+    }
+
+    .footer h2 {
+        font-size: 1.5rem; /* Kích thước tiêu đề */
+    }
+
+    .footer p {
+        font-size: 1rem; /* Kích thước phần đoạn văn */
+    }
+
+    .footer .btn {
+        padding: 14px 28px; /* Kích thước nút */
+        margin-top: 15px; /* Khoảng cách từ trên xuống */
+    }
+}
+/* Example of responsive CSS */
+@media (max-width: 768px) {
+    /* Styles for smaller screens */
+    .col-lg-6 {
+        width: 100%; /* Adjust layout for smaller screens */
+    }
+}
