@@ -10,7 +10,7 @@ use App\Http\Controllers\UserMenuController;
 use App\Http\Controllers\UserAccountController;
 
 // Đăng nhập tài khoản admin
-Route::get('/adminLogin', [AdminController::class, 'login'])->name('adminLogin.login');
+Route::get('/adminLogin', [AdminController::class, 'login'])->name('adminLogin.index');
 Route::post('/adminLogin', [AdminController::class, 'checkLogin'])->name('adminLogin.checkLogin');
 
 // Đăng xuất tài khoản admin

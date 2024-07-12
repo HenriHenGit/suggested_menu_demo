@@ -22,7 +22,7 @@ class UsersSeeder extends Seeder
                 'age' => 22,
                 'gender' => 1,
                 'level' => 1,
-                'password' => Hash::make('admin'),
+                'password' => Hash::make('admin1'),
                 'role' => 'admin',
             ],
             [
@@ -52,7 +52,7 @@ class UsersSeeder extends Seeder
                 'age' => 21,
                 'gender' => 1,
                 'level' => 1,
-                'password' => Hash::make('admin'),
+                'password' => Hash::make('admin1'),
                 'role' => 'admin',
             ],
         ]);

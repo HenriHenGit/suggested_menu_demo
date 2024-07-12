@@ -1,7 +1,6 @@
 /*header*/
-/* Demo Header */
 .header {
-    position: absolute;
+    position: static;
     top: 0;
     left: 0;
     width: 100%;
@@ -56,6 +55,10 @@
 
 .navbar-nav .nav-item:not(:last-child) {
     margin-right: 15px; /* Khoảng cách giữa các mục trong navbar, trừ mục cuối */
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
 }
 
 
@@ -269,10 +272,7 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
-    text-align: center;
 }
-
-
 /* footer */
 .footer {
     background-color: #65e06f; /* Màu nền của footer */
@@ -309,8 +309,38 @@
 }
 
 
+.footer .btn {
+    padding: 12px 24px; /* Kích thước nút */
+    margin-top: 10px; /* Khoảng cách từ trên xuống */
+}
 
 
+/* Thiết lập cho các thiết bị laptop lớn và desktop */
+@media (min-width: 993px) {
+.footer {
+    padding: 30px 0; /* Khoảng cách padding top và bottom */
+}
+
+.footer h2 {
+    font-size: 1.5rem; /* Kích thước tiêu đề */
+}
+
+.footer p {
+    font-size: 1rem; /* Kích thước phần đoạn văn */
+}
+
+.footer .btn {
+    padding: 14px 28px; /* Kích thước nút */
+    margin-top: 15px; /* Khoảng cách từ trên xuống */
+}
+}
+/* Example of responsive CSS */
+@media (max-width: 768px) {
+/* Styles for smaller screens */
+.col-lg-6 {
+    width: 100%; /* Adjust layout for smaller screens */
+}
+}
 
 
 
