@@ -1,0 +1,40 @@
+.card-header {
+    background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0; /* Bo góc vuông */
+    padding: 10px 15px; /* Tăng khoảng cách cho dễ nhìn */
+    color: #333; /* Màu chữ tối */
+    font-weight: bold; /* Chữ đậm */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #e2e6ea; /* Màu nền khi hover */
+    color: #007bff; /* Màu chữ khi hover */
+}
+
+.nav-pills .nav-link.active {
+    background-color: #007bff; /* Màu nền cho tab đang chọn */
+    color: white; /* Màu chữ cho tab đang chọn */
+}
+
+.circle-small {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%; /* Hình tròn */
+    background-color: #f0f0f0; /* Màu nền cho các ngày */
+    text-align: center;
+    margin: 5px;
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.circle-small.current-day {
+    background-color: #28a745; /* Màu nổi bật cho ngày hiện tại */
+    color: white; /* Màu chữ cho ngày hiện tại */
+}

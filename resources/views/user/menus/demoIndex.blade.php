@@ -3,11 +3,13 @@
 @section('title')
     <title>
         Danh sách món ăn</title>
+    <link rel="stylesheet" href="{{ asset('css/style-menu.css') }}">
 @endsection
 
 @section('content')
     @php
         use Illuminate\Support\Str;
+
     @endphp
     <!-- Main content -->
     <div class="content-wrapper">
@@ -20,24 +22,37 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header p-2">
-                                <ul class="nav nav-pills">
-                                    @foreach ($meals as $index => $meal)
-                                        @if ($index == 0)
-                                            <li class="nav-item"><a class="nav-link active" href="#activity"
-                                                    data-toggle="tab">Ngày {{ $index + 1 }}</a></li>
-                                        @else
-                                            <li class="nav-item"><a class="nav-link" href="#newTag{{ $index }}"
-                                                    data-toggle="tab">Ngày {{ $index + 1 }}</a></li>
-                                        @endif
-                                        @if ($index == 6)
-                                            @php
-                                                break;
-                                            @endphp
-                                        @endif
+                                <ul class="nav nav-pills" id="mealTabs">
+                                    <?php
+                                    $daysOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+                                    $days = [];
+                                    // Lấy thứ hiện tại (1 = Thứ Hai, ..., 7 = Chủ Nhật)
+                                    $currentDayOfWeek = date('N');
+                                    
+                                    // Tính toán các ngày trong tuần bắt đầu từ Thứ Hai
+                                    for ($i = 1; $i <= 7; $i++) {
+                                        // Tính ngày tương ứng cho từng ô (1 = Thứ Hai)
+                                        $date = strtotime('last Monday +' . ($i - 1) . ' days');
+                                        $days[] = [
+                                            'date' => date('d/m', $date),
+                                            'dayOfWeek' => $daysOfWeek[date('w', $date)],
+                                            'isToday' => date('d/m') == date('d/m', $date),
+                                        ];
+                                    }
+                                    ?>
+                                    @foreach ($days as $index => $day)
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ $day['isToday'] ? 'active' : '' }}"
+                                                href="#{{ $index == 0 ? 'activity' : 'newTag' . $index }}"
+                                                data-toggle="tab">
+                                                <span class="date">{{ $day['date'] }}</span><br>
+                                                <span class="dayOfWeek">{{ $day['dayOfWeek'] }}</span>
+                                            </a>
+                                        </li>
                                     @endforeach
-
                                 </ul>
                             </div><!-- /.card-header -->
+
                             <div class="card-body">
                                 <div class="tab-content">
                                     @foreach ($meals as $i => $meal)
