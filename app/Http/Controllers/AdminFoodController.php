@@ -24,6 +24,7 @@ class AdminFoodController extends Controller
     private $stepRecipes;
     private $category_ingre;
     private $foods;
+    private $foodId;
 
 
     public function __construct(Nutri $nutris, Food_nutri $foodNutris, Recipe_detail $recipeDetails, Ingredient $ingredients, Step_recipe $stepRecipes, Category_ingre $category_ingre, Food $foods)
@@ -37,23 +38,12 @@ class AdminFoodController extends Controller
         $this->foods = $foods;
     }
 
-    public function showIngredient($id)
-    {
-        $food = $this->foods->where('id', $id)->first();
-        $ingredients = $this->ingredients->paginate(10);
-        $categoryIngres = $this->category_ingre->all();
-        $recipeDetails = $this->recipeDetails->where('food_id', $id)->get();
 
-        $ingredientIds = $recipeDetails->pluck('ingredient_id')->toArray();
-        $ingredientFood = $this->ingredients->whereIn('id', $ingredientIds)->get();
-
-        return view('admin.foods.add_ingredient', compact('id', 'ingredients', 'categoryIngres', 'food', 'ingredientFood', 'recipeDetails'));
-    }
 
 
     public function addIngredient(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'ingredient_id' => 'required|integer|exists:ingredients,id',
             'amount' => 'required|numeric|min:0',
         ]);
@@ -70,22 +60,59 @@ class AdminFoodController extends Controller
             $recipe_detail->amount = $request->input('amount');
             $recipe_detail->unit = 'g';
             $recipe_detail->save();
+        } else {
+            $checkRecipeDetails->amount = $checkRecipeDetails->amount + $request->input('amount');
+            $checkRecipeDetails->save();
         }
 
         $food = $this->foods->findOrFail($id);
         $food->status = 'added ingredient';
         $food->save();
 
-        return redirect()->route('foods.showIngredient', ['id' => $id]);
+        $ingredient = $this->ingredients->findOrFail($idIngre);
+
+        $this->insertFoodNutri($id);
+
+        return redirect()->route('admin.foods.edit', ['id' => $id])->with('Thêm nguyên liệu ' . strtolower($ingredient) . ' vào món ăn ' . strtolower($food->food_name) . ' thành công');
     }
 
+    public function deleteIngre($foodId, $ingreId)
+    {
+        $ingredient = $this->ingredients->find($ingreId);
+
+        $recipeDetail = $this->recipeDetails->where('ingredient_id', $ingreId)
+            ->where('food_id', $foodId)
+            ->first();
+
+        if (!$recipeDetail) {
+            return redirect()->route('admin.ingredients.index')->with('error', 'Nguyên liệu không tồn tại.');
+        }
+
+        $recipeDetail->delete();
+
+        $checkRecipe = $this->recipeDetails->where('food_id', $foodId)->get();
+
+        if (count($checkRecipe) > 0) {
+            $food = $this->foods->findOrFail($foodId);
+            $food->status = 'added ingredient';
+            $food->save();
+        } else {
+            $food = $this->foods->findOrFail($foodId);
+            $food->status = 'pending ingredient';
+            $food->save();
+        }
+
+        $this->insertFoodNutri($foodId);
+
+        return redirect()->route('admin.foods.edit', ['id' => $foodId])->with('success', 'Nguyên liệu ' . strtolower($ingredient->name) . ' đã được xóa khỏi món ăn ' . strtolower($food->food_name) . '.');
+    }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $foods = Food::paginate(10);
+        $foods = Food::all();
         $foodIds = Food::select('id')->get();
         return view('admin.foods.index', compact('foods'));
     }
@@ -108,7 +135,7 @@ class AdminFoodController extends Controller
             'category_food_id' => 'required|string',
             'desc' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'number_eat' => 'required|numeric',
+            'number_eat' => 'required|numeric|min:1',
             'recipes.*.content' => 'nullable|string',
             'recipes.*.img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -150,7 +177,7 @@ class AdminFoodController extends Controller
             }
         }
 
-        return redirect()->route('admin.foods.index');
+        return redirect()->route('admin.foods.index')->with('success', 'Thêm món ăn ' . $food->food_name . ' thành công');
     }
 
 
@@ -179,9 +206,19 @@ class AdminFoodController extends Controller
      */
     public function edit($id)
     {
+        $recipeDetails = $this->recipeDetails->where('food_id', $id)->get();
+
+        $ingredientIds = $recipeDetails->pluck('ingredient_id')->unique();
+
+        $ingredientFood = $this->ingredients->whereIn('id', $ingredientIds)->get();
+
+        $ingredients = $this->ingredients->all();
+
+        $categoryIngres = $this->category_ingre->all();
+
         $food = $this->foods->find($id);
         $stepRecipes = $this->stepRecipes->where('food_id', $id)->orderBy('sort_step')->get();
-        return view('admin.foods.edit', compact('food', 'stepRecipes'));
+        return view('admin.foods.edit', compact('food', 'stepRecipes', 'ingredientFood', 'recipeDetails', 'ingredients', 'categoryIngres'));
     }
 
     /**
@@ -249,7 +286,7 @@ class AdminFoodController extends Controller
             }
         }
 
-        return redirect()->route('admin.foods.index')->with('success', 'Cập nhật thành công');
+        return redirect()->route('admin.foods.index')->with('success', 'Cập nhật món ăn ' . strtolower($food->food_name) . ' thành công');
     }
 
 
@@ -271,6 +308,6 @@ class AdminFoodController extends Controller
         $food->delete();
 
 
-        return redirect()->route('admin.foods.index')->with('success', 'Món ăn đã được xóa.');
+        return redirect()->route('admin.foods.index')->with('success', 'Món ăn ' . strtolower($food->food_name) . ' đã được xóa.');
     }
 }

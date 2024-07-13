@@ -20,6 +20,16 @@
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Đăng ký tài khoản</p>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form action="{{ route('register.store') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">

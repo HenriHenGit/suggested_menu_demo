@@ -80,8 +80,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNumber">Khẩu phần ăn</label>
-                                    <input type="number" id="inputNumber" name="number_eat" class="form-control"
-                                        value="{{ old('number_eat') }}">
+                                    <input type="number" id="inputNumber" name="number_eat" min="1"
+                                        class="form-control" value="{{ old('number_eat') }}">
                                     @if ($errors->has('number_eat'))
                                         <span class="text-danger">{{ $errors->first('number_eat') }}</span>
                                     @endif

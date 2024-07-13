@@ -131,5 +131,7 @@ return [
         'nutri' => 'dinh dưỡng',
         'ingredient_detail' => 'chi tiết dinh dưỡng',
         'unit' => 'đơn vị',
+        'desc' => 'mô tả',
+        'content' => 'nội dung',
     ],
 ];

@@ -7,6 +7,16 @@
 
 @section('content')
     <div class="content-wrapper">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -81,7 +91,8 @@
                                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" id="inputName"
-                                                        placeholder="Họ và tên" name="name" value="{{ old('name') }}">
+                                                        placeholder="Họ và tên" name="name"
+                                                        value="{{ old('name', $user->name) }}">
                                                     @if ($errors->has('name'))
                                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                                     @endif
@@ -91,7 +102,8 @@
                                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                                 <div class="col-sm-10">
                                                     <input type="email" class="form-control" id="inputEmail"
-                                                        placeholder="Email" name="email" value="{{ old('email') }}">
+                                                        placeholder="Email" name="email"
+                                                        value="{{ old('email', $user->email) }}">
                                                     @if ($errors->has('email'))
                                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                                     @endif
@@ -103,7 +115,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" id="inputName2"
                                                         placeholder="Số điện thoại" name="phone"
-                                                        value="{{ old('phone') }}">
+                                                        value="{{ old('phone', $user->phone) }}">
                                                     @if ($errors->has('phone'))
                                                         <span class="text-danger">{{ $errors->first('phone') }}</span>
                                                     @endif
@@ -113,7 +125,8 @@
                                                 <label for="inputName2" class="col-sm-2 col-form-label">Tuổi</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" id="inputName2"
-                                                        placeholder="Tuổi" name="age" value="{{ old('age') }}">
+                                                        placeholder="Tuổi" name="age"
+                                                        value="{{ old('age', $user->age) }}">
                                                     @if ($errors->has('age'))
                                                         <span class="text-danger">{{ $errors->first('age') }}</span>
                                                     @endif
@@ -125,11 +138,11 @@
                                                     <select name="gender" class="form-control">
                                                         <option value="" disabled selected>Giới tính</option>
                                                         <option value="1"
-                                                            {{ old('gender') == '1' ? 'selected' : '' }}>
+                                                            {{ old('gender', $user->gender) == '1' ? 'selected' : '' }}>
                                                             Nam
                                                         </option>
                                                         <option value="0"
-                                                            {{ old('gender') == '0' ? 'selected' : '' }}>
+                                                            {{ old('gender', $user->gender) == '0' ? 'selected' : '' }}>
                                                             Nữ
                                                         </option>
                                                     </select>

@@ -23,7 +23,7 @@ class AdminController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('admin.foods.index')->with('success', 'Đăng nhập thành công!');
         } else {
-            return redirect()->route('adminLogin.login')->with('error', 'Email hoặc mật khẩu không đúng.');
+            return redirect()->route('adminLogin.index')->with('error', 'Email hoặc mật khẩu không đúng.');
         }
     }
 

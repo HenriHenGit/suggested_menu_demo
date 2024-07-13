@@ -77,7 +77,7 @@ class AdminIngredientController extends Controller
                 $ingredientDetail->save();
             }
         }
-        return redirect()->route('admin.ingredients.index')->with('success', 'Thêm thành công');
+        return redirect()->route('admin.ingredients.index')->with('success', 'Thêm nguyên liệu ' . strtolower($ingredient->name) . ' thành công');
     }
 
     public function edit($id)
@@ -120,7 +120,7 @@ class AdminIngredientController extends Controller
             }
         }
 
-        return redirect()->route('admin.ingredients.index')->with('success', 'Cập nhật thành công');
+        return redirect()->route('admin.ingredients.index')->with('success', 'Cập nhật nguyên liệu ' . strtolower($ingredient->name) . ' thành công');
     }
 
     public function delete($id)
@@ -129,14 +129,14 @@ class AdminIngredientController extends Controller
 
 
         if (!$ingredient) {
-            return redirect()->route('admin.ingredients.index')->with('error', 'Món ăn không tồn tại.');
+            return redirect()->route('admin.ingredients.index')->with('error', 'Nguyên liệu không tồn tại.');
         }
 
 
         $ingredient->delete();
 
 
-        return redirect()->route('admin.ingredients.index')->with('success', 'Món ăn đã được xóa.');
+        return redirect()->route('admin.ingredients.index')->with('success', 'Nguyên liệu đã được xóa.');
     }
 
 

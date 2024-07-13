@@ -27,13 +27,16 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Đăng nhập tài khoản</p>
 
-                <!-- Hiển thị thông báo lỗi -->
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 @if (session('error'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('error') }}
                     </div>
                 @endif
-
                 <form action="{{ route('login.store') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">

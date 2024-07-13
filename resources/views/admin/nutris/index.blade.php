@@ -1,10 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Quản lý nguyên liệu</title>
+    <title>Danh sách thành phần dinh dưỡng</title>
 @endsection
 
 @section('content')
+    @php
+        use Illuminate\Support\Str;
+    @endphp
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -33,11 +37,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Bảng nguyên liệu</h3>
-                                <a href="{{ route('admin.ingredients.create') }}"
+                                <h3 class="card-title">Bảng thành phần dinh dưỡng</h3>
+                                <a href="{{ route('admin.nutris.create') }}"
                                     class="btn btn-inline btn-success btn-sm ml-3">Thêm
-                                    nguyên
-                                    liệu</a>
+                                    TP.dinh dưỡng</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -52,46 +55,39 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">Stt</th>
-                                            <th>Tên nguyên liệu</th>
-                                            <th>Nhóm nguyên liệu</th>
-                                            <th>Trạng thái</th>
+                                            <th>Stt</th>
+                                            <th>Tên dinh dưỡng</th>
+                                            <th>Mô tả</th>
+                                            <th>Đơn vị</th>
                                             <th class="text-right">Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($ingredients as $index => $ingredient)
+                                        @foreach ($nutris as $index => $nutri)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ $ingredient->name }}</td>
-                                                <td>
-                                                    @foreach ($categoryIngres as $categoryIngre)
-                                                        @if ($categoryIngre->id == $ingredient->category_ingre_id)
-                                                            {{ $categoryIngre->name }}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                                <td><span class="badge bg-success">Đã có dinh dưỡng</span></td>
+                                                <td>{{ $nutri->name }}</td>
+                                                <td>{{ Str::limit($nutri->desc, 30) }}</td>
+                                                <td>{{ $nutri->unit }}</td>
                                                 <td class="project-actions text-right">
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ route('admin.ingredients.show', ['id' => $ingredient->id]) }}">
+                                                        href="{{ route('admin.nutris.show', ['id' => $nutri->id]) }}">
                                                         <i class="fas fa-folder"></i>
                                                         Xem
                                                     </a>
                                                     <a class="btn btn-info btn-sm"
-                                                        href="{{ route('admin.ingredients.edit', ['id' => $ingredient->id]) }}">
+                                                        href="{{ route('admin.nutris.edit', ['id' => $nutri->id]) }}">
                                                         <i class="fas fa-pencil-alt"></i>
                                                         Sửa
                                                     </a>
-                                                    {{-- <a class="btn btn-danger btn-sm"
-                                                        href="{{ route('admin.ingredients.delete', ['id' => $ingredient->id]) }}">
+                                                    <a class="btn btn-danger btn-sm"
+                                                        href="{{ route('admin.nutris.delete', ['id' => $nutri->id]) }}">
                                                         <i class="fas fa-trash"></i>
                                                         Xóa
-                                                    </a> --}}
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
 
@@ -108,4 +104,5 @@
         </section>
         <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
 @endsection
