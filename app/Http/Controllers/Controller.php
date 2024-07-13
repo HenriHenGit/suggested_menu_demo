@@ -19,9 +19,9 @@ abstract class Controller
 {
     protected function handl($meals_per_day = 3, $toleranceMeal = 3000, $timesFind = 100)
     {
-        $mealAdjust = Meal_adjustments::findOrFail(1);
+        $mealAdjust = Meal_adjustments::find(1);
 
-        if (count($mealAdjust) > 0) {
+        if ($mealAdjust) {
             $meals_per_day = $mealAdjust->meals_per_day;
             $toleranceMeal = $mealAdjust->toleranceMeal;
             $timesFind = $mealAdjust->timesFind;
@@ -164,9 +164,9 @@ abstract class Controller
 
     protected function MenuInDay($userId, $sl = 3)
     {
-        $mealAdjust = Meal_adjustments::findOrFail(1);
+        $mealAdjust = Meal_adjustments::find(1);
 
-        if (count($mealAdjust) > 0) {
+        if ($mealAdjust) {
             $sl = $mealAdjust->meals_per_day;
         }
 

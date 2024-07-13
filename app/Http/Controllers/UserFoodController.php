@@ -64,6 +64,7 @@ class UserFoodController extends Controller
         $foodNutris = $this->foodNutris->whereIn('nutri_id', $nutriIds)->get();
         $userId = session('userId');
         if ($userId) {
+
             $user = $this->user->find($userId);
             $age = $user->age;
             if ($age >= 70) {
