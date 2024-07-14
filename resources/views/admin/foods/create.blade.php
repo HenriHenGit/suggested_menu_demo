@@ -175,7 +175,7 @@
                                             <div class="card-header">
                                                 <h4 class="card-title">
                                                     <a class="d-block w-100" data-toggle="collapse" href="#collapse-4">
-                                                        4. Công thức
+                                                        4. Công thức (thu gọn)
                                                     </a>
                                                 </h4>
                                             </div>
@@ -197,7 +197,7 @@
                                             <div class="card-header">
                                                 <h4 class="card-title">
                                                     <a class="d-block w-100" data-toggle="collapse" href="#collapse-4">
-                                                        5. Công thức
+                                                        5. Công thức (thu gọn)
                                                     </a>
                                                 </h4>
                                             </div>
@@ -219,7 +219,7 @@
                                             <div class="card-header">
                                                 <h4 class="card-title">
                                                     <a class="d-block w-100" data-toggle="collapse" href="#collapse-4">
-                                                        6. Công thức
+                                                        6. Công thức (thu gọn)
                                                     </a>
                                                 </h4>
                                             </div>
@@ -241,7 +241,7 @@
                                             <div class="card-header">
                                                 <h4 class="card-title">
                                                     <a class="d-block w-100" data-toggle="collapse" href="#collapse-4">
-                                                        7. Công thức
+                                                        7. Công thức (thu gọn)
                                                     </a>
                                                 </h4>
                                             </div>
@@ -263,7 +263,7 @@
                                             <div class="card-header">
                                                 <h4 class="card-title">
                                                     <a class="d-block w-100" data-toggle="collapse" href="#collapse-1">
-                                                        8. Công thức
+                                                        8. Công thức (thu gọn)
                                                     </a>
                                                 </h4>
                                             </div>
