@@ -1,43 +1,110 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Danh sách món ăn</title>
+    <title>Chi tiết người dùng</title>
 @endsection
-
 
 @section('content')
     <div class="content-wrapper">
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('error') }}
-            </div>
-        @endif
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
         <!-- Main content -->
+        <br>
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Thông tin người dùng "{{ $user->name }}"</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Email</th>
+                                            <th>SĐT</th>
+                                            <th>Tuổi</th>
+                                            <th>Giới tính</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $user->id }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->phone }}</td>
+                                            <td>{{ $user->age }}</td>
+                                            <td>{{ $user->gender }}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Thông tin dinh dưỡng</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Stt</th>
+                                            <th>Tên dinh dưỡng</th>
+                                            <th>Hàm lượng</th>
+                                            <th>Đơn vị</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($userDetails as $index => $userNutri)
+                                            <tr>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>
+                                                    @foreach ($nutris as $nutri)
+                                                        @if ($nutri->id == $userNutri->nutri_id)
+                                                            {{ $nutri->name }}
+                                                            @php
+                                                                break;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    {{ $userNutri->amount }}
+                                                </td>
+                                                <td><span class="badge bg-info">
+                                                        @foreach ($nutris as $nutri)
+                                                            @if ($nutri->id == $userNutri->nutri_id)
+                                                                {{ $nutri->unit }}
+                                                                @php
+                                                                    break;
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <br>
+                                {{ $userDetails->links() }}
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Bảng món ăn</h3>
-                                <a href="{{ route('admin.foods.create') }}"
-                                    class="btn btn-inline btn-success btn-sm ml-3">Thêm món
-                                    ăn</a>
+                                <h3 class="card-title">Bảng món ăn đề xuất</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"
                                         title="Collapse">
@@ -76,9 +143,6 @@
                                             </th>
                                             <th style="width: 8%" class="text-center">
                                                 Trạng thái
-                                            </th>
-                                            <th style="width: 10%">
-                                                Chức năng
                                             </th>
                                         </tr>
                                     </thead>
@@ -136,38 +200,20 @@
                                                         <span class="badge badge-warning">Đang thêm nguyên liệu</span>
                                                     @endif
                                                 </td>
-                                                <td class="project-actions text-right">
-                                                    <a class="btn btn-primary btn-sm"
-                                                        href="{{ route('admin.foods.show', ['id' => $food->id]) }}">
-                                                        <i class="fas fa-folder"></i>
-                                                        Xem
-                                                    </a>
-                                                    <a class="btn btn-info btn-sm"
-                                                        href="{{ route('admin.foods.edit', ['id' => $food->id]) }}">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                        Sửa
-                                                    </a>
-                                                    <a class="btn btn-danger btn-sm"
-                                                        href="{{ route('admin.foods.delete', ['id' => $food->id]) }}">
-                                                        <i class="fas fa-trash"></i>
-                                                        Xóa
-                                                    </a>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
                 <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>

@@ -17,7 +17,7 @@ use App\Models\Meal_adjustments;
 
 abstract class Controller
 {
-    protected function handl($meals_per_day = 3, $toleranceMeal = 3000, $timesFind = 100)
+    protected function handl($adminUser_id = 0, $meals_per_day = 3, $toleranceMeal = 3000, $timesFind = 100)
     {
         $mealAdjust = Meal_adjustments::find(1);
 
@@ -26,8 +26,12 @@ abstract class Controller
             $toleranceMeal = $mealAdjust->toleranceMeal;
             $timesFind = $mealAdjust->timesFind;
         }
-        // Nhận request id của người dùng (demo vd: 2)
-        $userId = session('userId');
+        // Nhận request id của người dùng
+        if ($adminUser_id) {
+            $userId = $adminUser_id;
+        } else {
+            $userId = session('userId');
+        }
 
         $userDetail = User_detail::where('user_id', $userId)->get();
         $needs = $userDetail;
@@ -176,6 +180,7 @@ abstract class Controller
         $menus = Menu::where('user_id', $userId)->get();
         $foods = Food::all();
 
+        // Tính tổng dinh dưỡng các bữa ăn
         foreach ($menus as $menu) {
             foreach ($foods as $food) {
                 if ($food->id == $menu->food_id) {
@@ -197,6 +202,7 @@ abstract class Controller
 
         // Tách meals thành các phần nhỏ hơn
         $splitMeals = array_chunk($meals, $sl, true);
+        // Mảng lưu kết quả cuối
         $combinedMeals = [];
 
         // Lấy dữ liệu từ bảng User_detail
@@ -270,6 +276,73 @@ abstract class Controller
             $foodNutri->nutri_id = $nutriId;
             $foodNutri->amount = $amount;
             $foodNutri->save();
+        }
+    }
+
+    protected function insertMenu($userId)
+    {
+
+        // $userMenu = Menu::where('user_id', $userId)->delete();
+        $userMenu = Menu::where('user_id', $userId)->get();
+        if ($userMenu->isEmpty($userId)) {
+            $meals = $this->handl();
+            foreach ($meals as $index => $meal) {
+                if (isset($meal['meal']['main_dishes'])) {
+                    $menu = new Menu();
+                    $menu->user_id = $userId;
+                    $menu->food_id = $meal['meal']['main_dishes']->id;
+                    $menu->meal = $index;
+                    $menu->save();
+                }
+                if (isset($meal['meal']['appetizer'])) {
+                    $menu = new Menu();
+                    $menu->user_id = $userId;
+                    $menu->food_id = $meal['meal']['appetizer']->id;
+                    $menu->meal = $index;
+                    $menu->save();
+                }
+                if (isset($meal['meal']['desserts'])) {
+                    $menu = new Menu();
+                    $menu->user_id = $userId;
+                    $menu->food_id = $meal['meal']['desserts']->id;
+                    $menu->meal = $index;
+                    $menu->save();
+                }
+            }
+        }
+    }
+
+    protected function updateMenu($userId)
+    {
+
+        $userMenu = Menu::where('user_id', $userId)->delete();
+        $userMenu = Menu::where('user_id', $userId)->get();
+
+        if ($userMenu->isEmpty()) {
+            $meals = $this->handl($userId);
+            foreach ($meals as $index => $meal) {
+                if (isset($meal['meal']['main_dishes'])) {
+                    $menu = new Menu();
+                    $menu->user_id = $userId;
+                    $menu->food_id = $meal['meal']['main_dishes']->id;
+                    $menu->meal = $index;
+                    $menu->save();
+                }
+                if (isset($meal['meal']['appetizer'])) {
+                    $menu = new Menu();
+                    $menu->user_id = $userId;
+                    $menu->food_id = $meal['meal']['appetizer']->id;
+                    $menu->meal = $index;
+                    $menu->save();
+                }
+                if (isset($meal['meal']['desserts'])) {
+                    $menu = new Menu();
+                    $menu->user_id = $userId;
+                    $menu->food_id = $meal['meal']['desserts']->id;
+                    $menu->meal = $index;
+                    $menu->save();
+                }
+            }
         }
     }
 }

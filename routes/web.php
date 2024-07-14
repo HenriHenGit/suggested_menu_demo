@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminFoodController;
 use App\Http\Controllers\AdminIngredientController;
 use App\Http\Controllers\AdminNutriController;
 use App\Http\Controllers\AdminMenuController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\UserFoodController;
 use App\Http\Controllers\UserMenuController;
 use App\Http\Controllers\UserAccountController;
@@ -50,6 +51,17 @@ Route::middleware('auth_admin')->prefix('admin')->group(function () {
         Route::get('/edit/{id}', [AdminNutriController::class, 'edit'])->name('admin.nutris.edit');
         Route::post('/update/{id}', [AdminNutriController::class, 'update'])->name('admin.nutris.update');
         Route::get('/delete/{id}', [AdminNutriController::class, 'delete'])->name('admin.nutris.delete');
+    });
+    Route::prefix('users')->group(function () {
+        Route::get('/', [AdminUserController::class, 'index'])->name('admin.users.index');
+        Route::get('/show/{id}', [AdminUserController::class, 'show'])->name('admin.users.show');
+        Route::get('/create', [AdminUserController::class, 'create'])->name('admin.users.create');
+        Route::post('/store', [AdminUserController::class, 'store'])->name('admin.users.store');
+        Route::get('/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.users.edit');
+        Route::post('/update/{id}', [AdminUserController::class, 'update'])->name('admin.users.update');
+        Route::get('/delete/{id}', [AdminUserController::class, 'delete'])->name('admin.users.delete');
+        Route::get('/deleteFood/{foodId}/{userId}', [AdminUserController::class, 'deleteFood'])->name('admin.users.deleteFood');
+        Route::get('/addFood/{foodId}/{userId}/{newFood}', [AdminUserController::class, 'addFood'])->name('admin.users.addFood');
     });
     Route::prefix('menus')->group(function () {
         Route::get('/', [AdminMenuController::class, 'index'])->name('admin.menus.index');

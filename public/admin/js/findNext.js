@@ -21,14 +21,17 @@ $(function () {
                 next: "Tiếp",
             },
             emptyTable: "Không có dữ liệu",
-            info: "Hiển thị _END_ dòng tiếp theo của _TOTAL_ mục",
-            infoEmpty: "Hiển thị 0 dòng tiếp theo dòng của 0 mục",
-            lengthMenu: "Hiển thị _MENU_ mục",
+            // info: "Hiển thị _END_ dòng tiếp theo của _TOTAL_ mục",
+            info: "",
+            // infoEmpty: "Hiển thị 0 dòng tiếp theo dòng của 0 mục",
+            infoEmpty: "",
+            // lengthMenu: "Hiển thị _MENU_ mục",
+            lengthMenu: "",
             search: "Tìm kiếm:",
             zeroRecords: "Không tìm thấy kết quả",
             infoFiltered: "(lọc từ tổng số _MAX_ mục)",
         },
-        dom: '<"row"<"col-md-6"l><"col-md-6 text-right"f>>rtip', // Sử dụng dom để sắp xếp lại cấu trúc
+        dom: '<"row"<"col-md-6"l><"col-md-6 text-right"f>>rtip',
     });
 
     table.buttons().container().appendTo("#example1_buttons_container");

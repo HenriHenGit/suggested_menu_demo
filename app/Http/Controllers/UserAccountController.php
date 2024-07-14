@@ -74,46 +74,12 @@ class UserAccountController extends Controller
 
         session(['userGender' => $userGender]);
         session(['userName' => $userName]);
-        if ($userId) {
-            $cacheKey = 'meal_' . $userId;
-        }
+
 
         return redirect()->route('account.index')->with('success', 'Thông tin của bạn đã được cập nhật thành công.');
     }
 
-    private function updateMenu($userId)
-    {
 
-        $userMenu = Menu::where('user_id', $userId)->delete();
-        $userMenu = Menu::where('user_id', $userId)->get();
-
-        if ($userMenu->isEmpty()) {
-            $meals = $this->handl();
-            foreach ($meals as $index => $meal) {
-                if (isset($meal['meal']['main_dishes'])) {
-                    $menu = new Menu();
-                    $menu->user_id = $userId;
-                    $menu->food_id = $meal['meal']['main_dishes']->id;
-                    $menu->meal = $index;
-                    $menu->save();
-                }
-                if (isset($meal['meal']['appetizer'])) {
-                    $menu = new Menu();
-                    $menu->user_id = $userId;
-                    $menu->food_id = $meal['meal']['appetizer']->id;
-                    $menu->meal = $index;
-                    $menu->save();
-                }
-                if (isset($meal['meal']['desserts'])) {
-                    $menu = new Menu();
-                    $menu->user_id = $userId;
-                    $menu->food_id = $meal['meal']['desserts']->id;
-                    $menu->meal = $index;
-                    $menu->save();
-                }
-            }
-        }
-    }
 
     private function updateUserDetail($orderNutris, $userId)
     {
