@@ -73,7 +73,7 @@ return [
     'mimes'                => 'Trường :attribute phải là một tệp loại: :values.',
     'mimetypes'            => 'Trường :attribute phải là một tệp loại: :values.',
     'min'                  => [
-        'numeric' => 'Trường :attribute phải ít nhất là :min.',
+        'numeric' => 'Trường :attribute phải ít nhất là :min tuổi.',
         'file'    => 'Trường :attribute phải ít nhất là :min kilobytes.',
         'string'  => 'Trường :attribute phải ít nhất là :min ký tự.',
         'array'   => 'Trường :attribute phải có ít nhất :min phần tử.',

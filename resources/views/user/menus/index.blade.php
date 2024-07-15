@@ -26,12 +26,10 @@
                                     <?php
                                     $daysOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
                                     $days = [];
-                                    // Lấy thứ hiện tại (1 = Thứ Hai, ..., 7 = Chủ Nhật)
+                                    
                                     $currentDayOfWeek = date('N');
                                     
-                                    // Tính toán các ngày trong tuần bắt đầu từ Thứ Hai
                                     for ($i = 1; $i <= 7; $i++) {
-                                        // Tính ngày tương ứng cho từng ô (1 = Thứ Hai)
                                         $date = strtotime('last Monday +' . ($i - 1) . ' days');
                                         $days[] = [
                                             'date' => date('d/m', $date),
@@ -58,89 +56,6 @@
                                     @foreach ($meals as $i => $meal)
                                         @if ($i == 0)
                                             <div class="active tab-pane" id="activity">
-                                                <!-- Thông tin bữa ăn và dinh dưỡng -->
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Thông tin bữa ăn và dinh dưỡng của bạn
-                                                            </h3>
-                                                        </div>
-                                                        <!-- /.card-header -->
-                                                        <div class="card-body p-0">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="width: 10px">Stt</th>
-                                                                        <th>Tên dinh dưỡng</th>
-                                                                        <th>Hàm lượng</th>
-                                                                        <th>Bữa ăn</th>
-                                                                        <th>Chệnh lệch</th>
-                                                                        <th>Đơn vị</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach ($userDetail as $index => $userNutri)
-                                                                        <tr>
-                                                                            <td>{{ $index + 1 }}</td>
-
-                                                                            <td>
-                                                                                @foreach ($nutris as $nutri)
-                                                                                    @if ($nutri->id == $userNutri->nutri_id)
-                                                                                        {{ $nutri->name }}
-                                                                                        @php
-                                                                                            break;
-                                                                                        @endphp
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </td>
-                                                                            <td>{{ $userNutri->amount }}</td>
-                                                                            <td>
-                                                                                @foreach ($meal['nutris'] as $key => $mealAmount)
-                                                                                    @if ($key == $userNutri->nutri_id)
-                                                                                        {{ $mealAmount }}
-                                                                                        @php
-                                                                                            break;
-                                                                                        @endphp
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </td>
-                                                                            <td>
-                                                                                @foreach ($meal['diff'] as $keyNutri => $diff)
-                                                                                    @if ($keyNutri == $userNutri->nutri_id)
-                                                                                        @if ($diff < 0)
-                                                                                            <span class="badge bg-danger">
-                                                                                                {{ $diff }}%
-                                                                                            </span>
-                                                                                        @else
-                                                                                            <span class="badge bg-warning">
-                                                                                                {{ $diff }}%
-                                                                                            </span>
-                                                                                        @endif
-                                                                                        @php
-                                                                                            break;
-                                                                                        @endphp
-                                                                                    @endif
-                                                                                @endforeach
-
-                                                                            </td>
-                                                                            <td><span class="badge bg-info">
-                                                                                    @foreach ($nutris as $nutri)
-                                                                                        @if ($nutri->id == $userNutri->nutri_id)
-                                                                                            {{ $nutri->unit }}
-                                                                                            @php
-                                                                                                break;
-                                                                                            @endphp
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                </span></td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <!-- /.card-body -->
-                                                    </div>
-                                                </div>
                                                 <!-- Thông tin người dùng -->
                                                 <div class="row">
                                                     @foreach ($meal['meal'] as $number => $mealFood)
@@ -218,11 +133,6 @@
                                                         </div>
                                                     @endforeach
                                                 </div>
-
-                                                <!-- /.row -->
-                                            </div>
-                                        @else
-                                            <div class="tab-pane" id="newTag{{ $i }}">
                                                 <!-- Thông tin bữa ăn và dinh dưỡng -->
                                                 <div class="col-md-12">
                                                     <div class="card">
@@ -239,7 +149,7 @@
                                                                         <th>Tên dinh dưỡng</th>
                                                                         <th>Hàm lượng</th>
                                                                         <th>Bữa ăn</th>
-                                                                        <th>Chệnh lệch</th>
+                                                                        <th>Chênh lệch</th>
                                                                         <th>Đơn vị</th>
                                                                     </tr>
                                                                 </thead>
@@ -306,6 +216,12 @@
                                                         <!-- /.card-body -->
                                                     </div>
                                                 </div>
+
+
+                                                <!-- /.row -->
+                                            </div>
+                                        @else
+                                            <div class="tab-pane" id="newTag{{ $i }}">
                                                 <!-- Thông tin người dùng -->
                                                 <div class="row">
                                                     @foreach ($meal['meal'] as $number => $mealFood)
@@ -385,6 +301,90 @@
                                                     @endforeach
                                                 </div>
                                                 <!-- /.row -->
+                                                <!-- Thông tin bữa ăn và dinh dưỡng -->
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Thông tin bữa ăn và dinh dưỡng của bạn
+                                                            </h3>
+                                                        </div>
+                                                        <!-- /.card-header -->
+                                                        <div class="card-body p-0">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 10px">Stt</th>
+                                                                        <th>Tên dinh dưỡng</th>
+                                                                        <th>Hàm lượng</th>
+                                                                        <th>Bữa ăn</th>
+                                                                        <th>Chênh lệch</th>
+                                                                        <th>Đơn vị</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($userDetail as $index => $userNutri)
+                                                                        <tr>
+                                                                            <td>{{ $index + 1 }}</td>
+
+                                                                            <td>
+                                                                                @foreach ($nutris as $nutri)
+                                                                                    @if ($nutri->id == $userNutri->nutri_id)
+                                                                                        {{ $nutri->name }}
+                                                                                        @php
+                                                                                            break;
+                                                                                        @endphp
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                            <td>{{ $userNutri->amount }}</td>
+                                                                            <td>
+                                                                                @foreach ($meal['nutris'] as $key => $mealAmount)
+                                                                                    @if ($key == $userNutri->nutri_id)
+                                                                                        {{ $mealAmount }}
+                                                                                        @php
+                                                                                            break;
+                                                                                        @endphp
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                            <td>
+                                                                                @foreach ($meal['diff'] as $keyNutri => $diff)
+                                                                                    @if ($keyNutri == $userNutri->nutri_id)
+                                                                                        @if ($diff < 0)
+                                                                                            <span class="badge bg-danger">
+                                                                                                {{ $diff }}%
+                                                                                            </span>
+                                                                                        @else
+                                                                                            <span class="badge bg-warning">
+                                                                                                {{ $diff }}%
+                                                                                            </span>
+                                                                                        @endif
+                                                                                        @php
+                                                                                            break;
+                                                                                        @endphp
+                                                                                    @endif
+                                                                                @endforeach
+
+                                                                            </td>
+                                                                            <td><span class="badge bg-info">
+                                                                                    @foreach ($nutris as $nutri)
+                                                                                        @if ($nutri->id == $userNutri->nutri_id)
+                                                                                            {{ $nutri->unit }}
+                                                                                            @php
+                                                                                                break;
+                                                                                            @endphp
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </span></td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!-- /.card-body -->
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         @endif
                                         @if ($i == 6)

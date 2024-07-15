@@ -17,8 +17,11 @@ use App\Models\Meal_adjustments;
 
 abstract class Controller
 {
+
+    // Hàm đề xuất món ăn
     protected function handl($adminUser_id = 0, $meals_per_day = 3, $toleranceMeal = 3000, $timesFind = 100)
     {
+        // Lấy option của admin khi thay đổi
         $mealAdjust = Meal_adjustments::find(1);
 
         if ($mealAdjust) {
@@ -174,6 +177,11 @@ abstract class Controller
             $sl = $mealAdjust->meals_per_day;
         }
 
+
+        if ($sl <= 0) {
+            $sl = 3;
+        }
+
         $meals = [];
         $mealNutri = [];
 
@@ -202,6 +210,7 @@ abstract class Controller
 
         // Tách meals thành các phần nhỏ hơn
         $splitMeals = array_chunk($meals, $sl, true);
+
         // Mảng lưu kết quả cuối
         $combinedMeals = [];
 
@@ -247,6 +256,7 @@ abstract class Controller
 
         return $combinedMeals;
     }
+
 
     protected function insertFoodNutri($foodId)
     {

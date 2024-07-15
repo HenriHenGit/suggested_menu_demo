@@ -151,7 +151,7 @@ class AdminUserController extends Controller
         // Validate the incoming request data
         $request->validate([
             'phone' => 'nullable|string|max:255',
-            'age' => 'required|integer|min:1|max:120',
+            'age' => 'required|integer|min:18|max:120',
             'gender' => 'required|integer',
         ]);
 

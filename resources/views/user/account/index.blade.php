@@ -103,7 +103,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="email" class="form-control" id="inputEmail"
                                                         placeholder="Email" name="email"
-                                                        value="{{ old('email', $user->email) }}">
+                                                        value="{{ old('email', $user->email) }}" disabled>
                                                     @if ($errors->has('email'))
                                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                                     @endif

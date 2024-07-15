@@ -61,13 +61,13 @@
 
                         </p>
                     </a>
-                    <a href="{{ route('admin.menus.index') }}" class="nav-link">
+                    {{-- <a href="{{ route('admin.menus.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý thực đơn
 
                         </p>
-                    </a>
+                    </a> --}}
                     <a href="{{ route('admin.users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>

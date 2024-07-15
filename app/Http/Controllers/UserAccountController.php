@@ -35,9 +35,8 @@ class UserAccountController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
             'phone' => 'nullable|string|max:20',
-            'age' => 'nullable|integer|min:1|max:100',
+            'age' => 'nullable|integer|min:18|max:100',
             'gender' => 'nullable|in:0,1',
         ]);
 
@@ -46,7 +45,6 @@ class UserAccountController extends Controller
 
         $user = User::findOrFail($id);
         $user->name = $request->input('name');
-        $user->email = $request->input('email');
         $user->phone = $request->input('phone');
         $user->age = $request->input('age');
         $user->gender = $request->input('gender');
