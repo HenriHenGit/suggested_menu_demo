@@ -24,7 +24,7 @@ class AdminIngredientController extends Controller
     }
     public function index()
     {
-        $ingredients = $this->ingredients->paginate(10);
+        $ingredients = $this->ingredients->all();
         $categoryIngres = $this->categoryIngres->all();
         return view('admin.ingredients.index', compact('ingredients', 'categoryIngres'));
     }
