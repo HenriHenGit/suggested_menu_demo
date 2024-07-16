@@ -155,7 +155,7 @@
                                                                 <tr>
                                                                     <th style="width: 10px">Stt</th>
                                                                     <th>Tên dinh dưỡng</th>
-                                                                    <th>Hàm lượng</th>
+                                                                    <th>Người dùng</th>
                                                                     <th>Bữa ăn</th>
                                                                     <th>Chênh lệch</th>
                                                                     <th>Đơn vị</th>
