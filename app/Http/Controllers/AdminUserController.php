@@ -109,6 +109,7 @@ class AdminUserController extends Controller
         $orderNutris = Order_nutri::where('age', $user->age)
             ->where('gender', $user->gender)
             ->get();
+        // dd($orderNutris);
         $this->insertUserDetail($orderNutris, $user->id);
         $this->insertMenu($user->id);
 
@@ -209,6 +210,7 @@ class AdminUserController extends Controller
 
     private function insertUserDetail($orderNutris, $userId)
     {
+
         foreach ($orderNutris as $orderNutri) {
 
             $existingRecord = User_detail::where('user_id', $userId)
@@ -221,13 +223,10 @@ class AdminUserController extends Controller
                 $existingRecord->updated_at = now();
                 $existingRecord->save();
             } else {
-
                 $newRecord = new User_detail;
                 $newRecord->user_id = $userId;
                 $newRecord->nutri_id = $orderNutri->nutri_id;
                 $newRecord->amount = $orderNutri->amount;
-                $newRecord->created_at = now();
-                $newRecord->updated_at = now();
                 $newRecord->save();
             }
         }
